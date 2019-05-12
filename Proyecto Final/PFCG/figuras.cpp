@@ -1144,13 +1144,12 @@ void  CFiguras::riel2(GLfloat radioM, GLfloat radiom, int meridianos, int parale
 			glTexCoord2f(ctext_s*i, 1.0f); glVertex3fv(v8);
 			glEnd();
 		}
-
-		glPushMatrix();
-		glTranslatef(v1[0], v1[1], v1[2]);
-		glRotatef(90, 0, 0, 1);
-		glRotatef((270 + (aux)), 1, 0, 0);
-		fig1.cilindro(0.05, 1.2, 15, text1);
-		glPopMatrix();
+			glPushMatrix();
+				glTranslatef(v1[0], v1[1], v1[2]);
+				glRotatef(90, 0, 0, 1);
+				glRotatef(-(aux*i), 1, 0, 0);
+				fig1.cilindro(0.05, 1.2, 15, text1);
+			glPopMatrix();
 	}
 }
 
