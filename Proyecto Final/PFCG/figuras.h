@@ -22,6 +22,11 @@ class CFiguras
 	void skybox(float altura, float largo, float profundidad, GLuint text, GLuint text1);	//Funcion creacion cielo
 	void skybox2 (float altura, float largo, float profundidad, GLuint text);
 	void torus(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos);
+	void rollercoaster(GLuint text1, GLuint text2, GLuint text3, GLuint text4);
+	void riel1(GLuint text1);
+	void riel2(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1);
+	void riel3(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1);
+	void riel4(GLuint text1);
 
 
 };

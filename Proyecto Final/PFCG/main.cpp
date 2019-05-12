@@ -22,8 +22,13 @@ GLfloat Position2[] = { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 
 CTexture text1;
 CTexture text2;
+CTexture text3; //Base metalica 1
+CTexture text4; //Base metalica 2
+CTexture text5; //Base metalica 3
+CTexture text6; //Base metalica para montaña
 
 CFiguras fig1;
+CFiguras mountain;
 
 void InitGL(GLvoid) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);				// Negro de fondo	
@@ -53,6 +58,22 @@ void InitGL(GLvoid) {
 	text2.BuildGLTexture();
 	text2.ReleaseImage();
 
+	text3.LoadTGA("textura/metal1.tga");
+	text3.BuildGLTexture();
+	text3.ReleaseImage();
+
+	text4.LoadTGA("textura/metal2.tga");
+	text4.BuildGLTexture();
+	text4.ReleaseImage();
+
+	text5.LoadTGA("textura/metal3.tga");
+	text5.BuildGLTexture();
+	text5.ReleaseImage();
+
+	text6.LoadTGA("textura/metal_blue.tga");
+	text6.BuildGLTexture();
+	text6.ReleaseImage();
+
 	objCamera.Position_Camera(0, 2.5f, 3, 0, 2.5f, 0, 0, 1, 0);
 }
 
@@ -69,9 +90,13 @@ void display(void) {
 
 		glPushMatrix(); //Creamos cielo y suelo
 			glDisable(GL_LIGHTING);
-			glTranslatef(0, 60, 0);
-			fig1.skybox(130.0, 130.0, 130.0, text1.GLindex, text2.GLindex);
+			glTranslatef(0, 50, 0);
+			fig1.skybox(130.0, 100.0, 130.0, text1.GLindex, text2.GLindex); //altura, largo, profundidad
 			glEnable(GL_LIGHTING);
+		glPopMatrix();
+		//Dibujando Montaña Rusa
+		glPushMatrix();
+			mountain.rollercoaster(text3.GLindex, text4.GLindex, text5.GLindex, text6.GLindex);
 		glPopMatrix();
 	glPopMatrix();
 
@@ -89,7 +114,7 @@ void reshape(int width, int height)   // Creamos funcion Reshape
 	glLoadIdentity();
 
 	// Tipo de Vista
-	glFrustum(-0.1, 0.1, -0.1, 0.1, 0.1, 170.0);
+	glFrustum(-0.1, 0.1, -0.1, 0.1, 0.1, 500.0);
 	glMatrixMode(GL_MODELVIEW);							// Seleccionamos Modelview Matrix
 	glLoadIdentity();
 }
@@ -99,19 +124,19 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 	switch (key) {
 		case 'w':   //Movimientos de camara
 		case 'W':
-			objCamera.Move_Camera(CAMERASPEED + 0.2);
+			objCamera.Move_Camera(CAMERASPEED + 0.1);
 			break;
 		case 's':
 		case 'S':
-			objCamera.Move_Camera(-(CAMERASPEED + 0.2));
+			objCamera.Move_Camera(-(CAMERASPEED + 0.1));
 			break;
 		case 'a':
 		case 'A':
-			objCamera.Strafe_Camera(-(CAMERASPEED + 0.4));
+			objCamera.Strafe_Camera(-(CAMERASPEED + 0.1));
 			break;
 		case 'd':
 		case 'D':
-			objCamera.Strafe_Camera(CAMERASPEED + 0.4);
+			objCamera.Strafe_Camera(CAMERASPEED + 0.1);
 			break;
 		case 27:        // Cuando Esc es presionado...
 			exit(0);   // Salimos del programa
