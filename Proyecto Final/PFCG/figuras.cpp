@@ -929,7 +929,7 @@ void CFiguras::rollercoaster(GLuint text1, GLuint text2, GLuint text3, GLuint te
 	glPopMatrix();
 }
 
-void  CFiguras::riel1(GLuint text1) {
+void CFiguras::riel1(GLuint text1) {
 	float radio = 0.05, altura = 8.0, altura2 = 1.2;
 	int resolucion = 15;
 
@@ -1037,7 +1037,7 @@ void  CFiguras::riel1(GLuint text1) {
 	glPopMatrix();
 }
 
-void  CFiguras::riel2(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1) {
+void CFiguras::riel2(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1) {
 	CFiguras fig1;
 
 	float R1 = 0, R2 = 0;
@@ -1153,7 +1153,7 @@ void  CFiguras::riel2(GLfloat radioM, GLfloat radiom, int meridianos, int parale
 	}
 }
 
-void  CFiguras::riel3(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1) {
+void CFiguras::riel3(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1) {
 	CFiguras fig1;
 	float R = 0;
 	float r = 0;
@@ -1254,7 +1254,7 @@ void  CFiguras::riel3(GLfloat radioM, GLfloat radiom, int meridianos, int parale
 	glPopMatrix();
 }
 
-void  CFiguras::riel4(GLuint text1) {
+void CFiguras::riel4(GLuint text1) {
 	float radio = 0.05, altura = 0.7, altura2 = 1.2;
 	int resolucion = 15;
 
@@ -1387,5 +1387,268 @@ void  CFiguras::riel4(GLuint text1) {
 				glEnd();
 			}
 		glPopMatrix();
+	glPopMatrix();
+}
+
+void CFiguras::JM1(GLuint rojo, GLuint paredamarilla, GLuint parednaranja, GLuint n, GLuint text2, GLuint paredgris2, GLuint t_ESFERA2) {
+	CFiguras fig1; //FIGURA AUXILIAR
+	glPushMatrix();     //BASE
+		glTranslatef(25.0f, 0.0f, 0.0f);
+		fig1.cilindro(5.0, 0.5, 30, rojo); //text 1 hace referencia al color rojo
+	glPopMatrix();
+	glPushMatrix();     //BASE 2
+		glTranslatef(25.0f, 0.5f, 0.0f);
+		fig1.cilindro(4.0, 2.0, 30, paredamarilla);
+	glPopMatrix();
+	glPushMatrix();     //BASE 3
+		glTranslatef(25.0f, 1.0f, 0.0f);
+		fig1.cilindro(1.5, 5.0, 30, parednaranja);
+	glPopMatrix();
+	glPushMatrix();     //BASE 4
+		glTranslatef(25.0f, 6.0f, 0.0f);
+		fig1.cilindro(0.5, 5.0, 30, n);
+	glPopMatrix();
+	glPushMatrix();     //TECHO
+		glTranslatef(25.0f, 10.0f, 0.0f);
+		fig1.cilindro(4.5, 1.0, 30, text2);
+	glPopMatrix();
+	glPushMatrix();     //sujetador 1
+		glTranslatef(22.0f, 6.0f, 0.5f);
+		fig1.cilindro(0.2, 5.0, 30, paredgris2);
+	glPopMatrix();
+	glPushMatrix();     //sujetador 2
+		glTranslatef(28.0f, 6.0f, 0.5f);
+		fig1.cilindro(0.2, 5.0, 30, paredgris2);
+	glPopMatrix();
+	glPushMatrix();     //sujetador 3
+		glTranslatef(25.0f, 6.0f, -2.5f);
+		fig1.cilindro(0.2, 5.0, 30, paredgris2);
+	glPopMatrix();
+	glPushMatrix();     //sujetador 4
+		glTranslatef(25.0f, 6.0f, 2.5f);
+		fig1.cilindro(0.2, 5.0, 30, paredgris2);
+	glPopMatrix();
+	glPushMatrix();  //ESFERA DEL JUEGO 1
+		glTranslatef(22.0f, 6.0f, 0.5f);
+		fig1.esfera(0.5, 20, 20, t_ESFERA2);
+	glPopMatrix();
+	glPushMatrix();  //ESFERA DEL JUEGO 2
+		glTranslatef(28.0f, 6.0f, 0.5f);
+		fig1.esfera(0.5, 20, 20, t_ESFERA2);
+	glPopMatrix();
+	glPushMatrix();  //ESFERA DEL JUEGO 3
+		glTranslatef(25.0f, 6.0f, -2.5f);
+		fig1.esfera(0.5, 20, 20, t_ESFERA2);
+	glPopMatrix();
+	glPushMatrix();  //ESFERA DEL JUEGO 4
+		glTranslatef(25.0f, 6.0f, 2.5f);
+		fig1.esfera(0.5, 20, 20, t_ESFERA2);
+	glPopMatrix();
+}
+
+void CFiguras::JM2(GLuint paredgris1, GLuint paredgris2, GLuint tasas, GLuint rojo, GLuint paredamarilla, GLuint n) {
+	CFiguras fig1; //FIGURA AUXILIAR
+
+	glPushMatrix();     //BASE 1
+		glTranslatef(-35.0f, 0.5f, -5.0f);
+		fig1.prisma(1.0, 2.0, 1.0, paredgris2);
+	glPopMatrix();
+
+	glPushMatrix();     //BASE 2
+		glTranslatef(-35.0f, 0.5f, 5.0f);
+		fig1.prisma(1.0, 2.0, 1.0, paredgris2);
+	glPopMatrix();
+
+	glPushMatrix();     //BASE 3
+		glTranslatef(-20.0f, 0.5f, -5.0f);
+		fig1.prisma(1.0, 2.0, 1.0, paredgris2);
+	glPopMatrix();
+
+	glPushMatrix();     //BASE 4
+		glTranslatef(-20.0f, 0.5f, 5.0f);
+		fig1.prisma(1.0, 2.0, 1.0, paredgris2);
+	glPopMatrix();
+
+	glPushMatrix();     //sujetador 1
+		glTranslatef(-35.0f, 0.9f, -5.0f);
+		glRotatef(-15, 1.0f, 10.0f, 50.0f);
+		fig1.cilindro(0.2, 20.0, 30, paredgris1);
+	glPopMatrix();
+
+	glPushMatrix();     //sujetador 2
+		glTranslatef(-35.0f, 0.9f, 5.0f);
+		glRotatef(-15, 1.0f, 10.0f, 50.0f);
+		fig1.cilindro(0.2, 20.0, 30, paredgris1);
+	glPopMatrix();
+
+	glPushMatrix();     //sujetador 3
+		glTranslatef(-20.0f, 0.9f, -5.0f);
+		glRotatef(15, 1.0f, 1.0f, 50.0f);
+		fig1.cilindro(0.2, 20.0, 30, paredgris1);
+	glPopMatrix();
+
+	glPushMatrix();     //sujetador 4
+		glTranslatef(-20.0f, 0.9f, 5.0f);
+		glRotatef(15, 1.0f, 1.0f, 50.0f);
+		fig1.cilindro(0.2, 20.0, 30, paredgris1);
+	glPopMatrix();
+
+	glPushMatrix();     //circulo atras
+		glTranslatef(-27.5f, 21.0f, -5.25f);
+		glRotatef(120, 1.0f, 1.0f, 1.0f);
+		fig1.cilindro(3.0, 0.8, 30, tasas);
+	glPopMatrix();
+
+	glPushMatrix();     //cirdulo de enmedio
+		glTranslatef(-27.5f, 21.0f, 0.0f);
+		glRotatef(120, 1.0f, 1.0f, 1.0f);
+		fig1.cilindro(3.0, 0.8, 30, tasas);
+	glPopMatrix();
+
+	glPushMatrix();     //circulo enfrente
+		glTranslatef(-27.5f, 21.0f, 4.75f);
+		glRotatef(120, 1.0f, 1.0f, 1.0f);
+		fig1.cilindro(3.0, 0.8, 30, tasas);
+	glPopMatrix();
+
+	glPushMatrix();     //barra del circulo de atras
+		glTranslatef(-27.5f, 21.0f, -4.45f);
+		glRotatef(120, 1.0f, 1.0f, 1.0f);
+		fig1.cilindro(0.5, 4.5, 30, paredamarilla);
+	glPopMatrix();
+
+	glPushMatrix();     //barra del circulo de enfrente
+		glTranslatef(-27.5f, 21.0f, 0.45f);
+		glRotatef(120, 1.0f, 1.0f, 1.0f);
+		fig1.cilindro(0.5, 4.5, 30, paredamarilla);
+	glPopMatrix();
+
+	glPushMatrix();     //barra baja del circulo de enmedio
+		glTranslatef(-27.5f, 13.0f, 0.4f);
+		fig1.cilindro(0.3, 5.0, 30, n);
+	glPopMatrix();
+
+	glPushMatrix();     //circulo bajo de enmedio
+		glTranslatef(-27.5f, 11.5f, 0.4f);
+		fig1.cilindro(4.0, 1.0, 30, rojo);
+	glPopMatrix();
+}
+
+void CFiguras::JM3(GLuint t_MADERA2, GLuint paredamarilla, GLuint tasas, GLuint paredgris1, GLuint circo) {
+	CFiguras fig1; //FIGURA AUXILIAR
+
+	glPushMatrix();     //BASE
+		glTranslatef(0.0f, 0.0f, 20.0f);
+		fig1.cilindro(5.0, 0.5, 30, t_MADERA2);
+	glPopMatrix();
+
+	glPushMatrix();     //BASE PARA LA TASA1
+		glTranslatef(2.0f, 0.5f, 20.0f);
+		fig1.cilindro(1.0, 0.2, 30, paredamarilla);
+	glPopMatrix();
+
+	glPushMatrix();     //BASE PARA LA TASA2
+		glTranslatef(-2.0f, 0.5f, 20.0f);
+		fig1.cilindro(1.0, 0.2, 30, paredamarilla);
+	glPopMatrix();
+
+	glPushMatrix();     //BASE PARA LA TASA3
+		glTranslatef(0.0f, 0.5f, 23.0f);
+		fig1.cilindro(1.0, 0.2, 30, paredamarilla);
+	glPopMatrix();
+
+	glPushMatrix();     //BASE PARA LA TASA4
+		glTranslatef(0.0f, 0.5f, 17.0f);
+		fig1.cilindro(1.0, 0.2, 30, paredamarilla);
+	glPopMatrix();
+
+	glPushMatrix();    //TASA1
+		glTranslatef(-2.0f, 1.5f, 20.0f);
+		glScalef(3.2, -0.35, 3.2);
+		fig1.cono(2.0, 0.4, 100, tasas);
+	glPopMatrix();
+
+	glPushMatrix();    //TASA2
+		glTranslatef(2.0f, 1.5f, 20.0f);
+		glScalef(3.2, -0.35, 3.2);
+		fig1.cono(2.0, 0.4, 100, tasas);
+	glPopMatrix();
+
+	glPushMatrix();    //TASA3
+		glTranslatef(0.0f, 1.5f, 23.0f);
+		glScalef(3.2, -0.35, 3.2);
+		fig1.cono(2.0, 0.4, 100, tasas);
+	glPopMatrix();
+
+	glPushMatrix();    //TASA3
+		glTranslatef(0.0f, 1.5f, 17.0f);
+		glScalef(3.2, -0.35, 3.2);
+		fig1.cono(2.0, 0.4, 100, tasas);
+	glPopMatrix();
+
+	glPushMatrix();     //BARRA 
+		glTranslatef(0.0f, 0.0f, 20.0f);
+		fig1.cilindro(0.3, 7.0, 30, paredgris1);
+	glPopMatrix();
+
+	glPushMatrix();    //TECHO
+		glTranslatef(0.0f, 7.0f, 20.0f);
+		glScalef(15.2, 0.45, 10.2);
+		fig1.cono(2.0, 0.4, 100, circo);
+	glPopMatrix();
+}
+
+void CFiguras::JM4(GLuint n, GLuint parednaranja, GLuint circo, GLuint paredgris1, GLuint rojo, GLuint paredamarilla, GLuint paredgris2) {
+	CFiguras fig1; //FIGURA AUXILIAR
+
+	glPushMatrix();     //BARRA 
+		glTranslatef(0.0f, 0.0f, -20.0f);
+		fig1.cilindro(0.3, 7.0, 30, n);
+	glPopMatrix();
+
+	glPushMatrix();     //cubo de la barra
+		glTranslatef(0.0f, 7.5f, -20.0f);
+		fig1.prisma(4.0, 1.0, 2.0, parednaranja);
+	glPopMatrix();
+
+	glPushMatrix();     //brazo cubo de la barra
+		glTranslatef(2.0f, 7.5f, -20.0f);
+		fig1.prisma(1.0, 4.0, 1.0, circo);
+	glPopMatrix();
+
+	glPushMatrix();     //brazo arriba cubo de la barra
+		glTranslatef(4.0f, 9.5f, -20.0f);
+		fig1.prisma(5.0, 0.5, 1.0, paredgris1);
+	glPopMatrix();
+
+	glPushMatrix();     //cuerpo del avion
+		glTranslatef(4.0f, 13.0f, -20.0f);
+		fig1.prisma(2.0, 1.0, 6.0, rojo);
+	glPopMatrix();
+
+	glPushMatrix();     //cola del avion
+		glTranslatef(4.0f, 14.0f, -23.2f);
+		fig1.prisma(4.0, 1.0, 0.5, rojo);
+	glPopMatrix();
+
+	glPushMatrix();     //ala izq
+		glTranslatef(2.5f, 13.0f, -18.5f);
+		fig1.prisma(1.0, 2.5, 1.0, paredamarilla);
+	glPopMatrix();
+
+	glPushMatrix();     //ala der
+		glTranslatef(5.5f, 13.0f, -18.5f);
+		fig1.prisma(1.0, 2.5, 1.0, paredamarilla);
+	glPopMatrix();
+
+	glPushMatrix();     //helice 
+		glTranslatef(4.0f, 13.0f, -17.0f);
+		fig1.prisma(0.2, 4., 0.2, paredgris2);
+	glPopMatrix();
+
+	glPushMatrix();    //cupula
+		glTranslatef(4.0f, 14.0f, -20.0f);
+		glScalef(3.2, 0.5, 3.2);
+		fig1.cono(2.0, 0.4, 100, n);
 	glPopMatrix();
 }

@@ -20,15 +20,39 @@ GLfloat Specular[] = { 1.0, 1.0, 1.0, 1.0 };				// Specular Light Values
 GLfloat Position[] = { 0.0f, 7.0f, -5.0f, 0.0f };			// Light Position
 GLfloat Position2[] = { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 
-CTexture text1;
-CTexture text2;
+//Declaracion de texturas
+CTexture text1; //Cielo
+CTexture text2; //Suelo (pasto)
 CTexture text3; //Base metalica 1
 CTexture text4; //Base metalica 2
 CTexture text5; //Base metalica 3
 CTexture text6; //Base metalica para montaña
+CTexture t_ESFERA1;
+CTexture t_MADERA2;
+CTexture t_ESFERA2;
+CTexture t_ESFERA3;
+CTexture n;
+CTexture circo;
+CTexture paredamarilla;
+CTexture parednaranja;
+CTexture tasas;
+CTexture paredgris1;
+CTexture paredgris2;
+CTexture rojo;
+CTexture verde;
+CTexture verdeclaro;
 
-CFiguras fig1;
-CFiguras mountain;
+
+
+//Declaracion de figuras utilizadas
+CFiguras fig1; //figura para crear el cielo
+CFiguras fig2; //fig para crar juego giratorio
+CFiguras fig3; //fig para crear segundo juego giratorio
+CFiguras fig4; //fig para crear el tercer juego
+CFiguras fig5; //fig para crear cuarto juego
+CFiguras mountain; //fig para crear la montaña rusa
+
+
 
 void InitGL(GLvoid) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);				// Negro de fondo	
@@ -74,6 +98,62 @@ void InitGL(GLvoid) {
 	text6.BuildGLTexture();
 	text6.ReleaseImage();
 
+	t_ESFERA1.LoadTGA("textura/ESFERA1.tga");
+	t_ESFERA1.BuildGLTexture();
+	t_ESFERA1.ReleaseImage();
+
+	t_MADERA2.LoadTGA("textura/MADERA2.tga");
+	t_MADERA2.BuildGLTexture();
+	t_MADERA2.ReleaseImage();
+
+	t_ESFERA2.LoadTGA("textura/ESFERA2.tga");
+	t_ESFERA2.BuildGLTexture();
+	t_ESFERA2.ReleaseImage();
+
+	t_ESFERA3.LoadTGA("textura/ESFERA3.tga");
+	t_ESFERA3.BuildGLTexture();
+	t_ESFERA3.ReleaseImage();
+
+	n.LoadTGA("textura/n.tga");
+	n.BuildGLTexture();
+	n.ReleaseImage();
+
+	circo.LoadTGA("textura/circo.tga");
+	circo.BuildGLTexture();
+	circo.ReleaseImage();
+
+	paredamarilla.LoadTGA("textura/paredamarilla.tga");
+	paredamarilla.BuildGLTexture();
+	paredamarilla.ReleaseImage();
+
+	parednaranja.LoadTGA("textura/parednaranja.tga");
+	parednaranja.BuildGLTexture();
+	parednaranja.ReleaseImage();
+
+	paredgris1.LoadTGA("textura/paredgris1.tga");
+	paredgris1.BuildGLTexture();
+	paredgris1.ReleaseImage();
+
+	paredgris2.LoadTGA("textura/paredgris2.tga");
+	paredgris2.BuildGLTexture();
+	paredgris2.ReleaseImage();
+
+	tasas.LoadTGA("textura/tasas.tga");
+	tasas.BuildGLTexture();
+	tasas.ReleaseImage();
+
+	rojo.LoadTGA("textura/rojo.tga");
+	rojo.BuildGLTexture();
+	rojo.ReleaseImage();
+
+	verde.LoadTGA("textura/verde.tga");
+	verde.BuildGLTexture();
+	verde.ReleaseImage();
+
+	verdeclaro.LoadTGA("textura/verdeclaro.tga");
+	verdeclaro.BuildGLTexture();
+	verdeclaro.ReleaseImage();
+
 	objCamera.Position_Camera(0, 2.5f, 3, 0, 2.5f, 0, 0, 1, 0);
 }
 
@@ -94,8 +174,30 @@ void display(void) {
 			fig1.skybox(130.0, 100.0, 130.0, text1.GLindex, text2.GLindex); //altura, largo, profundidad
 			glEnable(GL_LIGHTING);
 		glPopMatrix();
+		//Dibujando primer juego mecanico
+		glPushMatrix();
+			glTranslatef(10.0, 0.0, 5.0);
+			fig2.JM1(rojo.GLindex, paredamarilla.GLindex, parednaranja.GLindex, n.GLindex, text2.GLindex, paredgris2.GLindex, t_ESFERA2.GLindex);
+		glPopMatrix();
+		//Dibujando segundo juego mecanico
+		glPushMatrix();
+			glTranslatef(-10.0, 0.0, 5.0);
+			fig3.JM2(paredgris1.GLindex, paredgris2.GLindex,tasas.GLindex, rojo.GLindex, paredamarilla.GLindex, n.GLindex);
+		glPopMatrix();
+		//Dibujando tercer juego mecanico
+		glPushMatrix();
+			glTranslatef(20.0, 0.0, 15.0);
+			fig4.JM3(t_MADERA2.GLindex, paredamarilla.GLindex, tasas.GLindex, paredgris1.GLindex, circo.GLindex);
+		glPopMatrix();
+		//Dibujando cuarto juego mecanico
+		glPushMatrix();
+			glTranslatef(-15.0, 0.0, 30.0);
+			glRotatef(135, 0,1,0);
+			fig5.JM4(n.GLindex, parednaranja.GLindex, circo.GLindex, paredgris1.GLindex, rojo.GLindex, paredamarilla.GLindex, paredgris1.GLindex);
+		glPopMatrix();
 		//Dibujando Montaña Rusa
 		glPushMatrix();
+			glTranslatef(0.0,0.0,-10.0);
 			mountain.rollercoaster(text3.GLindex, text4.GLindex, text5.GLindex, text6.GLindex);
 		glPopMatrix();
 	glPopMatrix();
