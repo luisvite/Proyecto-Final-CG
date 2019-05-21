@@ -1390,7 +1390,7 @@ void CFiguras::riel4(GLuint text1) {
 	glPopMatrix();
 }
 
-void CFiguras::JM1(GLuint rojo, GLuint paredamarilla, GLuint parednaranja, GLuint n, GLuint text2, GLuint paredgris2, GLuint t_ESFERA2) {
+void CFiguras::JM1(GLuint rojo, GLuint paredamarilla, GLuint parednaranja, GLuint n, GLuint text2, GLuint paredgris2, GLuint t_ESFERA2, int rot1) {
 	CFiguras fig1; //FIGURA AUXILIAR
 	glPushMatrix();     //BASE
 		glTranslatef(25.0f, 0.0f, 0.0f);
@@ -1406,47 +1406,53 @@ void CFiguras::JM1(GLuint rojo, GLuint paredamarilla, GLuint parednaranja, GLuin
 	glPopMatrix();
 	glPushMatrix();     //BASE 4
 		glTranslatef(25.0f, 6.0f, 0.0f);
+		glRotatef(rot1, 0, 1, 0);
 		fig1.cilindro(0.5, 5.0, 30, n);
 	glPopMatrix();
 	glPushMatrix();     //TECHO
 		glTranslatef(25.0f, 10.0f, 0.0f);
-		fig1.cilindro(4.5, 1.0, 30, text2);
-	glPopMatrix();
-	glPushMatrix();     //sujetador 1
-		glTranslatef(22.0f, 6.0f, 0.5f);
-		fig1.cilindro(0.2, 5.0, 30, paredgris2);
-	glPopMatrix();
-	glPushMatrix();     //sujetador 2
-		glTranslatef(28.0f, 6.0f, 0.5f);
-		fig1.cilindro(0.2, 5.0, 30, paredgris2);
-	glPopMatrix();
-	glPushMatrix();     //sujetador 3
-		glTranslatef(25.0f, 6.0f, -2.5f);
-		fig1.cilindro(0.2, 5.0, 30, paredgris2);
-	glPopMatrix();
-	glPushMatrix();     //sujetador 4
-		glTranslatef(25.0f, 6.0f, 2.5f);
-		fig1.cilindro(0.2, 5.0, 30, paredgris2);
-	glPopMatrix();
-	glPushMatrix();  //ESFERA DEL JUEGO 1
-		glTranslatef(22.0f, 6.0f, 0.5f);
-		fig1.esfera(0.5, 20, 20, t_ESFERA2);
-	glPopMatrix();
-	glPushMatrix();  //ESFERA DEL JUEGO 2
-		glTranslatef(28.0f, 6.0f, 0.5f);
-		fig1.esfera(0.5, 20, 20, t_ESFERA2);
-	glPopMatrix();
-	glPushMatrix();  //ESFERA DEL JUEGO 3
-		glTranslatef(25.0f, 6.0f, -2.5f);
-		fig1.esfera(0.5, 20, 20, t_ESFERA2);
-	glPopMatrix();
-	glPushMatrix();  //ESFERA DEL JUEGO 4
-		glTranslatef(25.0f, 6.0f, 2.5f);
-		fig1.esfera(0.5, 20, 20, t_ESFERA2);
+		glRotatef(rot1,0,1,0);
+		glPushMatrix();
+			fig1.cilindro(4.5, 1.0, 30, text2);
+		glPopMatrix();
+		glPushMatrix();     //sujetador 1
+			glTranslatef(-3.0f, -4.0f, 0.5f);
+			glPushMatrix();
+				fig1.cilindro(0.2, 5.0, 30, paredgris2);
+			glPopMatrix();
+			glPushMatrix();  //ESFERA DEL JUEGO 1
+				glTranslatef(0.0f, 0.0f, 0.0f);
+				fig1.esfera(0.5, 20, 20, t_ESFERA2);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();     //sujetador 2
+			glTranslatef(3.0f, -4.0f, 0.5f);
+			fig1.cilindro(0.2, 5.0, 30, paredgris2);
+			glPushMatrix();  //ESFERA DEL JUEGO 2
+				glTranslatef(0.0f, 0.0f, 0.0f);
+				fig1.esfera(0.5, 20, 20, t_ESFERA2);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();     //sujetador 3
+			glTranslatef(0.0f, -4.0f, -2.5f);
+			fig1.cilindro(0.2, 5.0, 30, paredgris2);
+			glPushMatrix();  //ESFERA DEL JUEGO 3
+				glTranslatef(0.0f, 0.0f, 0.0f);
+				fig1.esfera(0.5, 20, 20, t_ESFERA2);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();     //sujetador 4
+			glTranslatef(0.0f, -4.0f, 2.5f);
+			fig1.cilindro(0.2, 5.0, 30, paredgris2);
+			glPushMatrix();  //ESFERA DEL JUEGO 4
+				glTranslatef(0.0f, 0.0f, 0.0f);
+				fig1.esfera(0.5, 20, 20, t_ESFERA2);
+			glPopMatrix();
+		glPopMatrix();
 	glPopMatrix();
 }
 
-void CFiguras::JM2(GLuint paredgris1, GLuint paredgris2, GLuint tasas, GLuint rojo, GLuint paredamarilla, GLuint n) {
+void CFiguras::JM2(GLuint paredgris1, GLuint paredgris2, GLuint tasas, GLuint rojo, GLuint paredamarilla, GLuint n, int rot, int rot2) {
 	CFiguras fig1; //FIGURA AUXILIAR
 
 	glPushMatrix();     //BASE 1
@@ -1499,42 +1505,43 @@ void CFiguras::JM2(GLuint paredgris1, GLuint paredgris2, GLuint tasas, GLuint ro
 		fig1.cilindro(3.0, 0.8, 30, tasas);
 	glPopMatrix();
 
-	glPushMatrix();     //cirdulo de enmedio
-		glTranslatef(-27.5f, 21.0f, 0.0f);
-		glRotatef(120, 1.0f, 1.0f, 1.0f);
-		fig1.cilindro(3.0, 0.8, 30, tasas);
-	glPopMatrix();
-
 	glPushMatrix();     //circulo enfrente
 		glTranslatef(-27.5f, 21.0f, 4.75f);
 		glRotatef(120, 1.0f, 1.0f, 1.0f);
 		fig1.cilindro(3.0, 0.8, 30, tasas);
 	glPopMatrix();
 
-	glPushMatrix();     //barra del circulo de atras
-		glTranslatef(-27.5f, 21.0f, -4.45f);
-		glRotatef(120, 1.0f, 1.0f, 1.0f);
-		fig1.cilindro(0.5, 4.5, 30, paredamarilla);
-	glPopMatrix();
-
-	glPushMatrix();     //barra del circulo de enfrente
-		glTranslatef(-27.5f, 21.0f, 0.45f);
-		glRotatef(120, 1.0f, 1.0f, 1.0f);
-		fig1.cilindro(0.5, 4.5, 30, paredamarilla);
-	glPopMatrix();
-
-	glPushMatrix();     //barra baja del circulo de enmedio
-		glTranslatef(-27.5f, 13.0f, 0.4f);
-		fig1.cilindro(0.3, 5.0, 30, n);
-	glPopMatrix();
-
-	glPushMatrix();     //circulo bajo de enmedio
-		glTranslatef(-27.5f, 11.5f, 0.4f);
-		fig1.cilindro(4.0, 1.0, 30, rojo);
+	glPushMatrix();     //cirdulo de enmedio
+		glTranslatef(-27.5f, 21.0f, 0.0f);
+		glRotatef(rot2, 0, 0, 1);
+		glPushMatrix();
+			glRotatef(90, 1, 0, 0);
+			fig1.cilindro(3.0, 0.8, 30, tasas);
+			glPushMatrix();     //barra baja del circulo de enmedio
+				glRotatef(-90, 1, 0, 0);
+				glTranslatef(0.0f,-17.0f, 0.4f);
+				fig1.cilindro(0.3, 14.0, 30, n);
+				glPushMatrix();     //circulo bajo de enmedio
+					glTranslatef(0.0f, -1.0f, 0.0f);
+					glRotatef(rot, 0, 1, 0);
+					fig1.cilindro(4.0, 1.0, 30, rojo);
+				glPopMatrix();
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();     //barra del circulo de atras
+			glTranslatef(-0.0f, 0.0f, -4.45f);
+			glRotatef(90, 1, 0, 0);
+			fig1.cilindro(0.5, 4.5, 30, paredamarilla);
+		glPopMatrix();
+		glPushMatrix();     //barra del circulo de enfrente
+			glTranslatef(0.0f, 0.0f, 0.45f);
+			glRotatef(120, 1.0f, 1.0f, 1.0f);
+			fig1.cilindro(0.5, 4.5, 30, paredamarilla);
+		glPopMatrix();
 	glPopMatrix();
 }
 
-void CFiguras::JM3(GLuint t_MADERA2, GLuint paredamarilla, GLuint tasas, GLuint paredgris1, GLuint circo) {
+void CFiguras::JM3(GLuint t_MADERA2, GLuint paredamarilla, GLuint tasas, GLuint paredgris1, GLuint circo, int rot1) {
 	CFiguras fig1; //FIGURA AUXILIAR
 
 	glPushMatrix();     //BASE
@@ -1598,57 +1605,408 @@ void CFiguras::JM3(GLuint t_MADERA2, GLuint paredamarilla, GLuint tasas, GLuint 
 	glPopMatrix();
 }
 
-void CFiguras::JM4(GLuint n, GLuint parednaranja, GLuint circo, GLuint paredgris1, GLuint rojo, GLuint paredamarilla, GLuint paredgris2) {
+void CFiguras::JM4(GLuint n, GLuint parednaranja, GLuint circo, GLuint paredgris1, GLuint rojo, GLuint paredamarilla, GLuint paredgris2, int rot) {
 	CFiguras fig1; //FIGURA AUXILIAR
 
 	glPushMatrix();     //BARRA 
 		glTranslatef(0.0f, 0.0f, -20.0f);
-		fig1.cilindro(0.3, 7.0, 30, n);
+		glPushMatrix();
+			fig1.cilindro(0.3, 7.0, 30, n);
+		glPopMatrix();
+		glRotatef(-rot, 0, 1, 0); //animacion
+		glPushMatrix();     //cubo de la barra
+			glTranslatef(0.0f, 7.5f, 0.0f);
+			fig1.prisma(4.0, 1.0, 2.0, parednaranja);
+		glPopMatrix();
+		glPushMatrix();     //brazo cubo de la barra
+			glTranslatef(2.0f, 7.5f, 0.0f);
+			fig1.prisma(1.0, 4.0, 1.0, circo);
+		glPopMatrix();
+		glPushMatrix();     //brazo arriba cubo de la barra
+			glTranslatef(4.0f, 9.5f, 0.0f);
+			fig1.prisma(5.0, 0.5, 1.0, paredgris1);
+		glPopMatrix();
+		glPushMatrix();     //cuerpo del avion
+			glTranslatef(4.0f, 13.0f, 0.0f);
+			fig1.prisma(2.0, 1.0, 6.0, rojo);
+		glPopMatrix();
+		glPushMatrix();     //cola del avion
+			glTranslatef(4.0f, 14.0f, -3.2f);
+			fig1.prisma(4.0, 1.0, 0.5, rojo);
+		glPopMatrix();
+		glPushMatrix();     //ala izq
+			glTranslatef(2.5f, 13.0f, 1.5f);
+			fig1.prisma(1.0, 2.5, 1.0, paredamarilla);
+		glPopMatrix();
+		glPushMatrix();     //ala der
+			glTranslatef(5.5f, 13.0f, 1.5f);
+			fig1.prisma(1.0, 2.5, 1.0, paredamarilla);
+		glPopMatrix();
+		glPushMatrix();     //helice 
+			glTranslatef(4.0f, 13.0f, 3.0f);
+			fig1.prisma(0.2, 4., 0.2, paredgris2);
+		glPopMatrix();
+		glPushMatrix();    //cupula
+			glTranslatef(4.0f, 14.0f, 0.0f);
+			glScalef(3.2, 0.5, 3.2);
+			fig1.cono(2.0, 0.4, 100, n);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void CFiguras::Fortuna(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1, GLuint text2, GLuint text3, int rot) {
+	CFiguras fig1;
+	float R = 0;
+	float r = 0;
+	int resolucion = 15;
+
+	float v1[] = { 0.0, 0.0, 0.0 };
+	float v2[] = { 0.0, 0.0, 0.0 };
+	float v3[] = { 0.0, 0.0, 0.0 };
+	float v4[] = { 0.0, 0.0, 0.0 };
+
+	//barra interna
+	float v5[] = { 0.0, 0.0, 0.0 };
+	float v6[] = { 0.0, 0.0, 0.0 };
+	float v7[] = { 0.0, 0.0, 0.0 };
+	float v8[] = { 0.0, 0.0, 0.0 };
+
+	int i, j;
+
+	GLdouble angulop = 2 * 3.1415 / paralelos;
+	GLdouble angulom = 2 * 3.1415 / meridianos;
+
+	r = (radioM - radiom) / 2;
+	R = radiom + r;
+
+	float ctext_s = 1.0 / resolucion;
+	float ctext_t = 0.0;
+
+	//Barras de union entre la rueda y el suelo
+	glPushMatrix();
+		glPushMatrix();
+			glTranslatef(8, 0, 0.60);
+			glRotatef(30,0,0,1);
+			fig1.cilindro(0.20, (radioM + 5.2), 15, text1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(-8, 0, 0.60);
+			glRotatef(-30, 0, 0, 1);
+			fig1.cilindro(0.20, (radioM + 5.2), 15, text1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(8, 0, -2.60);
+			glRotatef(30, 0, 0, 1);
+			fig1.cilindro(0.20, (radioM + 5.2), 15, text1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(-8, 0, -2.60);
+			glRotatef(-30, 0, 0, 1);
+			fig1.cilindro(0.20, (radioM + 5.2), 15, text1);
+		glPopMatrix();
 	glPopMatrix();
 
-	glPushMatrix();     //cubo de la barra
-		glTranslatef(0.0f, 7.5f, -20.0f);
-		fig1.prisma(4.0, 1.0, 2.0, parednaranja);
+	glPushMatrix();
+		glTranslatef(0,0,3.2);
+		glScalef(1.5,1,1.5);
+		glPushMatrix();
+		//Entrada y salida del juego
+		//Escaleras derechas
+			glBindTexture(GL_TEXTURE_2D, text2); //cargamos primera textura
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.15, 0.15);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(3.5, 0.15, 0.15);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(3.5, 0.15, -0.15);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(2.5, 0.15, -0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.3, -0.15);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(3.5, 0.3, -0.15);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(3.5, 0.3, -0.45);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(2.5, 0.3, -0.45);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.45, -0.45);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(3.5, 0.45, -0.45);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(3.5, 0.45, -0.75);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(2.5, 0.45, -0.75);
+			glEnd();
+			glBindTexture(GL_TEXTURE_2D, text3); //cargamos segunda textura
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.0, 0.15);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(3.5, 0.0, 0.15);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(3.5, 0.15, 0.15);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(2.5, 0.15, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.15, -0.15);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(3.5, 0.15, -0.15);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(3.5, 0.30, -0.15);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(2.5, 0.30, -0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.30, -0.45);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(3.5, 0.30, -0.45);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(3.5, 0.45, -0.45);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(2.5, 0.45, -0.45);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.45, -0.75);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(3.5, 0.45, -0.75);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(3.5, 0.60, -0.75);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(2.5, 0.60, -0.75);
+			glEnd();
+			//Escaleras izquierdas
+			glBindTexture(GL_TEXTURE_2D, text2);//cargamos primera textura
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.15, 0.15);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(-2.5, 0.15, 0.15);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(-2.5, 0.15, -0.15);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(-3.5, 0.15, -0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.3, -0.15);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(-2.5, 0.3, -0.15);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(-2.5, 0.3, -0.45);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(-3.5, 0.3, -0.45);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.45, -0.45);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(-2.5, 0.45, -0.45);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(-2.5, 0.45, -0.75);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(-3.5, 0.45, -0.75);
+			glEnd();
+			glBindTexture(GL_TEXTURE_2D, text3); //cargamos segunda textura
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.0, 0.15);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(-2.5, 0.0, 0.15);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(-2.5, 0.15, 0.15);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(-3.5, 0.15, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.15, -0.15);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(-2.5, 0.15, -0.15);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(-2.5, 0.30, -0.15);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(-3.5, 0.30, -0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.30, -0.45);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(-2.5, 0.30, -0.45);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(-2.5, 0.45, -0.45);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(-3.5, 0.45, -0.45);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.45, -0.75);
+				glTexCoord2f(1.5f, 0.0f); glVertex3f(-2.5, 0.45, -0.75);
+				glTexCoord2f(1.5f, 0.75f); glVertex3f(-2.5, 0.60, -0.75);
+				glTexCoord2f(0.0f, 0.75f); glVertex3f(-3.5, 0.60, -0.75);
+			glEnd();
+			//Tarima
+			glBindTexture(GL_TEXTURE_2D, text2); //cargamos primera textura
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-4.0, 0.6, 0.15);
+				glTexCoord2f(1.0f, 0.0f); glVertex3f(-3.5, 0.6, 0.15);
+				glTexCoord2f(1.0f, 4.10f); glVertex3f(-3.5, 0.6, -2);
+				glTexCoord2f(0.0f, 4.10f); glVertex3f(-4.0, 0.6, -2);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.6, -0.75);
+				glTexCoord2f(2.0f, 0.0f); glVertex3f(-2.5, 0.6, -0.75);
+				glTexCoord2f(2.0f, 2.3f); glVertex3f(-2.5, 0.6, -2);
+				glTexCoord2f(0.0f, 2.3f); glVertex3f(-3.5, 0.6, -2);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.5, 0.6, 0.15);
+				glTexCoord2f(10.0f, 0.0f); glVertex3f(2.5, 0.6, 0.15);
+				glTexCoord2f(10.0f, 4.1f); glVertex3f(2.5, 0.6, -2);
+				glTexCoord2f(0.0f, 4.1f); glVertex3f(-2.5, 0.6, -2);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.6, -0.75);
+				glTexCoord2f(2.0f, 0.0f); glVertex3f(3.5, 0.6, -0.75);
+				glTexCoord2f(2.0f, 2.3f); glVertex3f(3.5, 0.6, -2);
+				glTexCoord2f(0.0f, 2.3f); glVertex3f(2.5, 0.6, -2);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(3.5, 0.6, 0.15);
+				glTexCoord2f(1.0f, 0.0f); glVertex3f(4.0, 0.6, 0.15);
+				glTexCoord2f(1.0f, 4.10f); glVertex3f(4.0, 0.6, -2);
+				glTexCoord2f(0.0f, 4.10f); glVertex3f(3.5, 0.6, -2);
+			glEnd();
+			glBindTexture(GL_TEXTURE_2D, text3); //cargamos segunda textura
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.5, 0.0, 0.15);
+				glTexCoord2f(2.5f, 0.0f); glVertex3f(2.5, 0.0, 0.15);
+				glTexCoord2f(2.5f, 2.0f); glVertex3f(2.5, 0.60, 0.15);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(-2.5, 0.60, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-4.0, 0.0, 0.15);
+				glTexCoord2f(0.25f, 0.0f); glVertex3f(-3.5, 0.0, 0.15);
+				glTexCoord2f(0.25f, 2.0f); glVertex3f(-3.5, 0.60, 0.15);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(-4.0, 0.60, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(3.5, 0.0, 0.15);
+				glTexCoord2f(0.25f, 0.0f); glVertex3f(4.0, 0.0, 0.15);
+				glTexCoord2f(0.25f, 2.0f); glVertex3f(4.0, 0.60, 0.15);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(3.5, 0.60, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-4.0, 0.0, -2.0);
+				glTexCoord2f(4.0f, 0.0f); glVertex3f(4.0, 0.0, -2.0);
+				glTexCoord2f(4.0f, 2.0f); glVertex3f(4.0, 0.60, -2.0);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(-4.0, 0.60, -2.0);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-4.0, 0.0, 0.15);
+				glTexCoord2f(0.645f, 0.0f); glVertex3f(-4.0, 0.0, -2.0);
+				glTexCoord2f(0.645f, 2.0f); glVertex3f(-4.0, 0.60, -2.0);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(-4.0, 0.60, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(4.0, 0.0, 0.15);
+				glTexCoord2f(0.645f, 0.0f); glVertex3f(4.0, 0.0, -2.0);
+				glTexCoord2f(0.645f, 2.0f); glVertex3f(4.0, 0.60, -2.0);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(4.0, 0.60, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-3.5, 0.0, 0.15);
+				glTexCoord2f(0.645f, 0.0f); glVertex3f(-3.5, 0.0, -0.75);
+				glTexCoord2f(0.645f, 2.0f); glVertex3f(-3.5, 0.60, -0.75);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(-3.5, 0.60, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.5, 0.0, 0.15);
+				glTexCoord2f(0.645f, 0.0f); glVertex3f(-2.5, 0.0, -0.75);
+				glTexCoord2f(0.645f, 2.0f); glVertex3f(-2.5, 0.60, -0.75);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(-2.5, 0.60, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(3.5, 0.0, 0.15);
+				glTexCoord2f(0.645f, 0.0f); glVertex3f(3.5, 0.0, -0.75);
+				glTexCoord2f(0.645f, 2.0f); glVertex3f(3.5, 0.60, -0.75);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(3.5, 0.60, 0.15);
+			glEnd();
+			glBegin(GL_POLYGON);
+				glTexCoord2f(0.0f, 0.0f); glVertex3f(2.5, 0.0, 0.15);
+				glTexCoord2f(0.645f, 0.0f); glVertex3f(2.5, 0.0, -0.75);
+				glTexCoord2f(0.645f, 2.0f); glVertex3f(2.5, 0.60, -0.75);
+				glTexCoord2f(0.0f, 2.0f); glVertex3f(2.5, 0.60, 0.15);
+			glEnd();
+		glPopMatrix();
 	glPopMatrix();
 
-	glPushMatrix();     //brazo cubo de la barra
-		glTranslatef(2.0f, 7.5f, -20.0f);
-		fig1.prisma(1.0, 4.0, 1.0, circo);
+	glTranslatef(0, radioM+4.2, 0);
+	
+	glRotatef(rot, 0, 0, 1); //animacion
+
+	glPushMatrix();
+		glTranslatef(0,0,-3.0);
+		glRotatef(90,1,0,0);
+		fig1.cilindro(2, 4, 10, text1);
 	glPopMatrix();
 
-	glPushMatrix();     //brazo arriba cubo de la barra
-		glTranslatef(4.0f, 9.5f, -20.0f);
-		fig1.prisma(5.0, 0.5, 1.0, paredgris1);
-	glPopMatrix();
+	glPushMatrix();
+		glBindTexture(GL_TEXTURE_2D, text1);
 
-	glPushMatrix();     //cuerpo del avion
-		glTranslatef(4.0f, 13.0f, -20.0f);
-		fig1.prisma(2.0, 1.0, 6.0, rojo);
-	glPopMatrix();
+		for (i = 0; i < meridianos; i++)
+		{
+			for (j = 0; j < paralelos; j++)
+			{
 
-	glPushMatrix();     //cola del avion
-		glTranslatef(4.0f, 14.0f, -23.2f);
-		fig1.prisma(4.0, 1.0, 0.5, rojo);
-	glPopMatrix();
+				v1[0] = R * cos(angulom*i) + r * cos(angulom*i)*cos(angulop*j);
+				v1[1] = R * sin(angulom*i) + r * sin(angulom*i)*cos(angulop*j);
+				v1[2] = r * sin(angulop*j);
 
-	glPushMatrix();     //ala izq
-		glTranslatef(2.5f, 13.0f, -18.5f);
-		fig1.prisma(1.0, 2.5, 1.0, paredamarilla);
-	glPopMatrix();
+				glNormal3f(v1[0], v1[1], v1[2]);
 
-	glPushMatrix();     //ala der
-		glTranslatef(5.5f, 13.0f, -18.5f);
-		fig1.prisma(1.0, 2.5, 1.0, paredamarilla);
-	glPopMatrix();
+				v2[0] = R * cos(angulom*i) + r * cos(angulom*i)*cos(angulop*(j + 1));
+				v2[1] = R * sin(angulom*i) + r * sin(angulom*i)*cos(angulop*(j + 1));
+				v2[2] = r * sin(angulop*(j + 1));
 
-	glPushMatrix();     //helice 
-		glTranslatef(4.0f, 13.0f, -17.0f);
-		fig1.prisma(0.2, 4., 0.2, paredgris2);
-	glPopMatrix();
+				glNormal3f(v2[0], v2[1], v2[2]);
 
-	glPushMatrix();    //cupula
-		glTranslatef(4.0f, 14.0f, -20.0f);
-		glScalef(3.2, 0.5, 3.2);
-		fig1.cono(2.0, 0.4, 100, n);
+				v3[0] = R * cos(angulom*(i + 1)) + r * cos(angulom*(i + 1))*cos(angulop*(j + 1));
+				v3[1] = R * sin(angulom*(i + 1)) + r * sin(angulom*(i + 1))*cos(angulop*(j + 1));
+				v3[2] = r * sin(angulop*(j + 1));
+
+				glNormal3f(v3[0], v3[1], v3[2]);
+
+				v4[0] = R * cos(angulom*(i + 1)) + r * cos(angulom*(i + 1))*cos(angulop*j);
+				v4[1] = R * sin(angulom*(i + 1)) + r * sin(angulom*(i + 1))*cos(angulop*j);
+				v4[2] = r * sin(angulop*j);
+
+				glNormal3f(v4[0], v4[1], v4[2]);
+
+				v5[0] = R * cos(angulom*i) + r * cos(angulom*i)*cos(angulop*j);
+				v5[1] = R * sin(angulom*i) + r * sin(angulom*i)*cos(angulop*j);
+				v5[2] = (r * sin(angulop*j)) - 2;
+
+				glNormal3f(v5[0], v5[1], v5[2]);
+
+				v6[0] = R * cos(angulom*i) + r * cos(angulom*i)*cos(angulop*(j + 1));
+				v6[1] = R * sin(angulom*i) + r * sin(angulom*i)*cos(angulop*(j + 1));
+				v6[2] = (r * sin(angulop*(j + 1))) - 2;
+
+				glNormal3f(v6[0], v6[1], v6[2]);
+
+				v7[0] = R * cos(angulom*(i + 1)) + r * cos(angulom*(i + 1))*cos(angulop*(j + 1));
+				v7[1] = R * sin(angulom*(i + 1)) + r * sin(angulom*(i + 1))*cos(angulop*(j + 1));
+				v7[2] = (r * sin(angulop*(j + 1))) - 2;
+
+				glNormal3f(v7[0], v7[1], v7[2]);
+
+				v8[0] = R * cos(angulom*(i + 1)) + r * cos(angulom*(i + 1))*cos(angulop*j);
+				v8[1] = R * sin(angulom*(i + 1)) + r * sin(angulom*(i + 1))*cos(angulop*j);
+				v8[2] = (r * sin(angulop*j)) - 2;
+
+				glNormal3f(v8[0], v8[1], v8[2]);
+
+				glBegin(GL_POLYGON);
+					glTexCoord2f(ctext_s*i, 0.0f); glVertex3fv(v1);
+					glTexCoord2f(ctext_s*(i + 1), 0.0f); glVertex3fv(v2);
+					glTexCoord2f(ctext_s*(i + 1), 1.0f); glVertex3fv(v3);
+					glTexCoord2f(ctext_s*i, 1.0f);	glVertex3fv(v4);
+				glEnd();
+
+				glBegin(GL_POLYGON);
+					glTexCoord2f(ctext_s*i, 0.0f); glVertex3fv(v5);
+					glTexCoord2f(ctext_s*(i + 1), 0.0f); glVertex3fv(v6);
+					glTexCoord2f(ctext_s*(i + 1), 1.0f); glVertex3fv(v7);
+					glTexCoord2f(ctext_s*i, 1.0f); glVertex3fv(v8);
+				glEnd();
+			}
+			//barras de union
+			glPushMatrix();
+				glTranslatef(v1[0], v1[1], v1[2]);
+				glRotatef(-90, 1, 0, 0);
+				fig1.cilindro(0.05, 2, 15, text1);
+			glPopMatrix();
+			//Barras centrales
+			glPushMatrix();
+				glTranslatef(v1[0], v1[1], v1[2]);
+				glRotatef(((36 * i)+90), 0, 0, 1);
+				fig1.cilindro(0.05, radiom, 15, text1);
+			glPopMatrix();
+			glPushMatrix();
+			glTranslatef(v1[0], v1[1], v1[2]-2);
+				glRotatef(((36 * i) + 90), 0, 0, 1);
+				fig1.cilindro(0.05, radiom, 15, text1);
+			glPopMatrix();
+			//barras entre prismas y uniones
+			glPushMatrix();
+				glTranslatef(v1[0], v1[1], -1);
+				glRotatef((-180-rot), 0, 0, 1);
+				fig1.cilindro(0.05, 2, 15, text1);
+				glPushMatrix();
+					glTranslatef(0, 3, 0);
+					fig1.prisma(2, 2, 2, text1);
+				glPopMatrix();
+			glPopMatrix();
+		}
 	glPopMatrix();
 }

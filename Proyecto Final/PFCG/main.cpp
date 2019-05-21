@@ -2,8 +2,8 @@
 //************************************************************//
 //************************************************************//
 //************** Alumno (s): *********************************//
+//*************		Angeles Lopez Michael Josefh		******//
 //*************		Luis Enrique Vite Aquino			******//
-//*************											******//
 //************************************************************//
 //************************************************************//
 
@@ -27,6 +27,7 @@ CTexture text3; //Base metalica 1
 CTexture text4; //Base metalica 2
 CTexture text5; //Base metalica 3
 CTexture text6; //Base metalica para montaña
+CTexture text7; //Base metalica para rueda fortuna
 CTexture t_ESFERA1;
 CTexture t_MADERA2;
 CTexture t_ESFERA2;
@@ -42,17 +43,38 @@ CTexture rojo;
 CTexture verde;
 CTexture verdeclaro;
 
-
-
 //Declaracion de figuras utilizadas
 CFiguras fig1; //figura para crear el cielo
 CFiguras fig2; //fig para crar juego giratorio
 CFiguras fig3; //fig para crear segundo juego giratorio
 CFiguras fig4; //fig para crear el tercer juego
 CFiguras fig5; //fig para crear cuarto juego
+CFiguras fortuna;
 CFiguras mountain; //fig para crear la montaña rusa
 
+// Variables usadas para calcular frames por segundo: (Windows)
+DWORD dwFrames = 0;
+DWORD dwCurrentTime = 0;
+DWORD dwLastUpdateTime_1 = 0;
+DWORD dwLastUpdateTime2 = 0;
+DWORD dwLastUpdateTime2_2 = 0;
+DWORD dwLastUpdateTime3 = 0;
+DWORD dwLastUpdateTime4 = 0;
+DWORD dwLastUpdateTime5 = 0;
+DWORD dwLastUpdateTime6 = 0;
+DWORD dwElapsedTime_1 = 0;
+DWORD dwElapsedTime2 = 0;
+DWORD dwElapsedTime2_2 = 0;
+DWORD dwElapsedTime3 = 0;
+DWORD dwElapsedTime4 = 0;
+DWORD dwElapsedTime5 = 0;
+DWORD dwElapsedTime6 = 0;
 
+//Variables usadas para crear el movimiento
+int rot1_1 = 0, rot2 = 0, rot2_2 = 0, rot3 = 0, rot4 = 0, rot5 = 0, rot6 = 0;
+int aux1_1 = 0, aux2_1 = 0, aux3_1 = 0, aux4_1 = 0, aux5_1=0;
+int anim1 = 0, anim2 = 0, anim3 = 0, anim4 = 0, anim5 = 0, anim6 = 0;
+int t = 0;
 
 void InitGL(GLvoid) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);				// Negro de fondo	
@@ -97,6 +119,10 @@ void InitGL(GLvoid) {
 	text6.LoadTGA("textura/metal_blue.tga");
 	text6.BuildGLTexture();
 	text6.ReleaseImage();
+
+	text7.LoadTGA("textura/metal_green.tga");
+	text7.BuildGLTexture();
+	text7.ReleaseImage();
 
 	t_ESFERA1.LoadTGA("textura/ESFERA1.tga");
 	t_ESFERA1.BuildGLTexture();
@@ -177,23 +203,27 @@ void display(void) {
 		//Dibujando primer juego mecanico
 		glPushMatrix();
 			glTranslatef(10.0, 0.0, 5.0);
-			fig2.JM1(rojo.GLindex, paredamarilla.GLindex, parednaranja.GLindex, n.GLindex, text2.GLindex, paredgris2.GLindex, t_ESFERA2.GLindex);
+			fig2.JM1(rojo.GLindex, paredamarilla.GLindex, parednaranja.GLindex, n.GLindex, text2.GLindex, paredgris2.GLindex, t_ESFERA2.GLindex,rot1_1);
 		glPopMatrix();
 		//Dibujando segundo juego mecanico
 		glPushMatrix();
 			glTranslatef(-10.0, 0.0, 5.0);
-			fig3.JM2(paredgris1.GLindex, paredgris2.GLindex,tasas.GLindex, rojo.GLindex, paredamarilla.GLindex, n.GLindex);
+			fig3.JM2(paredgris1.GLindex, paredgris2.GLindex,tasas.GLindex, rojo.GLindex, paredamarilla.GLindex, n.GLindex, rot2, rot2_2);
 		glPopMatrix();
 		//Dibujando tercer juego mecanico
 		glPushMatrix();
 			glTranslatef(20.0, 0.0, 15.0);
-			fig4.JM3(t_MADERA2.GLindex, paredamarilla.GLindex, tasas.GLindex, paredgris1.GLindex, circo.GLindex);
+			fig4.JM3(t_MADERA2.GLindex, paredamarilla.GLindex, tasas.GLindex, paredgris1.GLindex, circo.GLindex, rot3);
 		glPopMatrix();
 		//Dibujando cuarto juego mecanico
 		glPushMatrix();
 			glTranslatef(-15.0, 0.0, 30.0);
 			glRotatef(135, 0,1,0);
-			fig5.JM4(n.GLindex, parednaranja.GLindex, circo.GLindex, paredgris1.GLindex, rojo.GLindex, paredamarilla.GLindex, paredgris1.GLindex);
+			fig5.JM4(n.GLindex, parednaranja.GLindex, circo.GLindex, paredgris1.GLindex, rojo.GLindex, paredamarilla.GLindex, paredgris1.GLindex, rot4);
+		glPopMatrix();
+		//Dibujando rueda fortuna
+		glPushMatrix();
+			fortuna.Fortuna(10,9.5,10,10, text7.GLindex, text3.GLindex, text4.GLindex, rot5);
 		glPopMatrix();
 		//Dibujando Montaña Rusa
 		glPushMatrix();
@@ -203,6 +233,116 @@ void display(void) {
 	glPopMatrix();
 
 	glutSwapBuffers();
+}
+
+void animacion()
+{
+	// Calculate the number of frames per one second:
+	//dwFrames++;
+	dwCurrentTime = GetTickCount(); // Even better to use timeGetTime()
+	dwElapsedTime_1 = dwCurrentTime - dwLastUpdateTime_1;
+	dwElapsedTime2 = dwCurrentTime - dwLastUpdateTime2;
+	dwElapsedTime2_2 = dwCurrentTime - dwLastUpdateTime2_2;
+	dwElapsedTime3 = dwCurrentTime - dwLastUpdateTime3;
+	dwElapsedTime4 = dwCurrentTime - dwLastUpdateTime4;
+	dwElapsedTime5 = dwCurrentTime - dwLastUpdateTime5;
+	dwElapsedTime6 = dwCurrentTime - dwLastUpdateTime6;
+	
+	//animacion 1
+	if (anim1 == 1)
+	{
+		//giro interno
+		if (dwElapsedTime_1 >= 40)
+		{
+			if (rot1_1 <= 358 && aux1_1 < 4) {
+				rot1_1 = (rot1_1 + 2) % 360;
+				dwLastUpdateTime_1 = dwCurrentTime;
+				if (rot1_1 == 0) {
+					aux1_1 = aux1_1 + 1;
+				}
+			}else {
+				anim1 = 0;
+			}
+		}
+	}
+
+	//animacion 2
+	if (anim2 == 1)
+	{
+		if (dwElapsedTime2 >= 50)
+		{
+			rot2 = (rot2 + 4) % 360;
+			dwLastUpdateTime2 = dwCurrentTime;
+		}
+		if (dwElapsedTime2_2 >= 50)
+		{
+			if (rot2_2 <= 356 && aux2_1 < 3){
+				rot2_2 = (rot2_2 + 4) % 360;
+				dwLastUpdateTime2_2 = dwCurrentTime;
+				if (rot2_2 == 0) {
+					aux2_1 = aux2_1+1;
+				}
+			}
+			else {
+				anim2 = 0;
+			}
+		}
+	}
+
+	//animacion 3
+	if (anim3 == 1)
+	{
+		if (dwElapsedTime3 >= 50)
+		{
+			if (rot3 <= 356 && aux3_1 < 3) {
+				rot3 = (rot3 + 4) % 360;
+				dwLastUpdateTime3 = dwCurrentTime;
+				if (rot3 == 0) {
+					aux3_1 = aux3_1 + 1;
+				}
+			}
+			else {
+				anim3 = 0;
+			}
+		}
+	}
+
+	//animacion 4
+	if (anim4 == 1)
+	{
+		if (dwElapsedTime4 >= 50)
+		{
+			if (rot4 <= 356 && aux4_1 < 5) {
+				rot4 = (rot4 + 4) % 360;
+				dwLastUpdateTime4 = dwCurrentTime;
+				if (rot4 == 0) {
+					aux4_1 = aux4_1 + 1;
+				}
+			}
+			else {
+				anim4 = 0;
+			}
+		}
+	}
+
+	//animacion 5
+	if (anim5 == 1)
+	{
+		if (dwElapsedTime5 >= 80)
+		{
+			if (rot5 <= 357 && aux5_1 < 3) {
+				rot5 = (rot5 + 3) % 360;
+				dwLastUpdateTime5 = dwCurrentTime;
+				if (rot5 == 0) {
+					aux5_1 = aux5_1 + 1;
+				}
+			}else{
+				anim5 = 0;
+			}
+		}
+	}
+
+	glutPostRedisplay();
 }
 
 void reshape(int width, int height)   // Creamos funcion Reshape
@@ -239,6 +379,42 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 		case 'd':
 		case 'D':
 			objCamera.Strafe_Camera(CAMERASPEED + 0.1);
+			break;
+		case '1':
+			if (anim1 == 0)
+			{
+				anim1 = 1;
+			}
+			else {
+				anim1 = 0;
+			}
+			break;
+		case '2':
+			if (anim2 == 0)
+			{
+				anim2 = 1;
+			}
+			else {
+				anim2 = 0;
+			}
+			break;
+		case '4':
+			if (anim4 == 0)
+			{
+				anim4 = 1;
+			}
+			else {
+				anim4 = 0;
+			}
+			break;
+		case '5':
+			if (anim5 == 0)
+			{
+				anim5 = 1;
+			}
+			else {
+				anim5 = 0;
+			}
 			break;
 		case 27:        // Cuando Esc es presionado...
 			exit(0);   // Salimos del programa
@@ -290,6 +466,7 @@ int main(int argc, char** argv)   // Main Function
 	glutReshapeFunc(reshape);	//Indicamos a Glut funci�n en caso de cambio de tamano
 	glutKeyboardFunc(keyboard);	//Indicamos a Glut funci�n de manejo de teclado
 	glutSpecialFunc(arrow_keys);	//Otras
+	glutIdleFunc(animacion);	//animacion
 
 	glutMainLoop();          // 
 
