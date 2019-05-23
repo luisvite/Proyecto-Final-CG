@@ -28,8 +28,14 @@ CTexture text4; //Base metalica 2
 CTexture text5; //Base metalica 3
 CTexture text6; //Base metalica para montaña
 CTexture text7; //Base metalica para rueda fortuna
-CTexture text8;
-CTexture text9;
+CTexture text8; //metal rojo
+CTexture text9; //material purpura
+CTexture text10; //Metal negro
+CTexture text11; //madera para las bancas
+CTexture text12; //Metal para la lampara
+CTexture text13; //esfera de la lampara
+CTexture text14; //Metal para bote gris
+
 CTexture t_ESFERA1;
 CTexture t_MADERA2;
 CTexture t_ESFERA2;
@@ -51,6 +57,9 @@ CFiguras fig2; //fig para crar juego giratorio
 CFiguras fig3; //fig para crear segundo juego giratorio
 CFiguras fig4; //fig para crear el tercer juego
 CFiguras fig5; //fig para crear cuarto juego
+CFiguras Banca;
+CFiguras Lampara;
+CFiguras Botes;
 CFiguras fortuna;
 CFiguras mountain; //fig para crear la montaña rusa
 CFiguras car;
@@ -141,6 +150,26 @@ void InitGL(GLvoid) {
 	text9.BuildGLTexture();
 	text9.ReleaseImage();
 
+	text10.LoadTGA("textura/metal_black.tga");
+	text10.BuildGLTexture();
+	text10.ReleaseImage();
+
+	text11.LoadTGA("textura/madera_banca.tga");
+	text11.BuildGLTexture();
+	text11.ReleaseImage();
+
+	text12.LoadTGA("textura/verde.tga");
+	text12.BuildGLTexture();
+	text12.ReleaseImage();
+
+	text13.LoadTGA("textura/blanco.tga");
+	text13.BuildGLTexture();
+	text13.ReleaseImage();
+	
+	text14.LoadTGA("textura/grey.tga");
+	text14.BuildGLTexture();
+	text14.ReleaseImage();
+
 	t_ESFERA1.LoadTGA("textura/ESFERA1.tga");
 	t_ESFERA1.BuildGLTexture();
 	t_ESFERA1.ReleaseImage();
@@ -197,7 +226,7 @@ void InitGL(GLvoid) {
 	verdeclaro.BuildGLTexture();
 	verdeclaro.ReleaseImage();
 
-	objCamera.Position_Camera(0, 2.5f, 3, 0, 2.5f, 0, 0, 1, 0);
+	objCamera.Position_Camera(0, 2.5f, 60, 0, 2.5f, 55, 0, 1, 0);
 }
 
 void display(void) {
@@ -219,37 +248,54 @@ void display(void) {
 		glPopMatrix();
 		//Dibujando primer juego mecanico
 		glPushMatrix();
-			glTranslatef(10.0, 0.0, 5.0);
+			glTranslatef(-75.0, 0.0, -50.0);
 			fig2.JM1(rojo.GLindex, paredamarilla.GLindex, parednaranja.GLindex, n.GLindex, text2.GLindex, paredgris2.GLindex, t_ESFERA2.GLindex,rot1_1);
 		glPopMatrix();
 		//Dibujando segundo juego mecanico
 		glPushMatrix();
-			glTranslatef(-10.0, 0.0, 5.0);
+			glTranslatef(-20.0, 0.0, 10.0);
 			fig3.JM2(paredgris1.GLindex, paredgris2.GLindex,tasas.GLindex, rojo.GLindex, paredamarilla.GLindex, n.GLindex, rot2, rot2_2);
 		glPopMatrix();
 		//Dibujando tercer juego mecanico
 		glPushMatrix();
-			glTranslatef(20.0, 0.0, 15.0);
+			glTranslatef(40.0, 0.0, 30.0);
 			fig4.JM3(t_MADERA2.GLindex, paredamarilla.GLindex, tasas.GLindex, paredgris1.GLindex, circo.GLindex, rot3, rot3_2);
 		glPopMatrix();
 		//Dibujando cuarto juego mecanico
 		glPushMatrix();
-			glTranslatef(-15.0, 0.0, 30.0);
+			glTranslatef(-20.0, 0.0, 35.0);
 			glRotatef(135, 0,1,0);
 			fig5.JM4(n.GLindex, parednaranja.GLindex, circo.GLindex, paredgris1.GLindex, rojo.GLindex, paredamarilla.GLindex, paredgris1.GLindex, rot4);
 		glPopMatrix();
 		//Dibujando rueda fortuna
 		glPushMatrix();
+			glTranslatef(40.0, 0.0, 20.0);
 			fortuna.Fortuna(10,9.5,10,10, text7.GLindex, text3.GLindex, text4.GLindex, rot5);
 		glPopMatrix();
 		//Dibujando Montaña Rusa
 		glPushMatrix();
-			glTranslatef(0.0,0.0,-10.0);
+			glTranslatef(10.0, 0.0,-15.0);
 			mountain.rollercoaster(text3.GLindex, text4.GLindex, text5.GLindex, text6.GLindex);
 		glPopMatrix();
+		//dibujando car de la montaña rusa
 		glPushMatrix();
-			glTranslatef(0.0, 0.65, -12.2);
+			glTranslatef(10.0, 0.65, -17.2);
 			car.Car(text8.GLindex, text9.GLindex, rot6);
+		glPopMatrix();
+		//Dibujando Bancas
+		glPushMatrix();
+			glTranslatef(-1,0,-5);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		//Dibujando lamparas
+		glPushMatrix();
+			glTranslatef(2.2, 0, -5);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		//Dibujando Botes de basuratext 10,13 y 14
+		glPushMatrix();
+			glTranslatef(-3.0,0,-5);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
 		glPopMatrix();
 	glPopMatrix();
 
@@ -258,8 +304,6 @@ void display(void) {
 
 void animacion()
 {
-	// Calculate the number of frames per one second:
-	//dwFrames++;
 	dwCurrentTime = GetTickCount(); // Even better to use timeGetTime()
 	dwElapsedTime_1 = dwCurrentTime - dwLastUpdateTime_1;
 	dwElapsedTime2 = dwCurrentTime - dwLastUpdateTime2;

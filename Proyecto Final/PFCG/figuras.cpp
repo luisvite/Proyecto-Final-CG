@@ -2313,3 +2313,225 @@ void CFiguras::Car(GLuint text1, GLuint text2, int rot) {
 		glPopMatrix();
 	glPopMatrix();
 }
+
+void CFiguras::Banca(GLuint text1, GLuint text2) {
+	CFiguras fig1;
+	//Base1
+	glPushMatrix();
+		glPushMatrix();
+			glTranslatef(0.0, 0.5, 0);
+			fig1.prisma(1.0, 0.1, 0.025, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.25, 0.5);
+			fig1.prisma(0.5, 0.1, 0.025, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.4875, 0.25);
+			fig1.prisma(0.025, 0.1, 0.5, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.25, 0.25);
+			fig1.prisma(0.025, 0.1, 0.5, text1);
+		glPopMatrix();
+	glPopMatrix();
+	//Base2, en esta sera colocada la madera para evitar mas traslaciones y rotaciones
+	glPushMatrix();
+		glTranslatef(1.0, 0, 0);
+		glPushMatrix();
+			glTranslatef(0.0, 0.5, 0);
+			fig1.prisma(1.0, 0.1, 0.025, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.25, 0.5);
+			fig1.prisma(0.5, 0.1, 0.025, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.4875, 0.25);
+			fig1.prisma(0.025, 0.1, 0.5, text1);
+			glTranslatef(0, 0.0, 0.0125);
+			//madera recostada 1
+			glPushMatrix();
+				glTranslatef(-0.025, 0.025, -0.175);
+				fig1.prisma(0.025, 2.05, 0.15, text2);
+			glPopMatrix();
+			//madera recostada 2
+			glPushMatrix();
+				glTranslatef(-0.025, 0.025, 0.0);
+				fig1.prisma(0.025, 2.05, 0.15, text2);
+			glPopMatrix();
+			//madera recostada 3
+			glPushMatrix();
+				glTranslatef(-0.025, 0.025, 0.175);
+				fig1.prisma(0.025, 2.05, 0.15, text2);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.25, 0.25);
+			fig1.prisma(0.025, 0.1, 0.5, text1);
+		glPopMatrix();
+		//madera superior
+		glPushMatrix();
+			glTranslatef(-0.025, 0.575, 0.025);
+			fig1.prisma(0.15, 2.05, 0.025, text2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-0.025, 0.75, 0.025);
+			fig1.prisma(0.15, 2.05, 0.025, text2);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-0.025, 0.925, 0.025);
+			fig1.prisma(0.15, 2.05, 0.025, text2);
+		glPopMatrix();
+	glPopMatrix();
+	//Base3
+	glPushMatrix();
+		glTranslatef(1.95, 0, 0);
+		glPushMatrix();
+			glTranslatef(0.0, 0.5, 0);
+			fig1.prisma(1.0, 0.1, 0.025, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.25, 0.5);
+			fig1.prisma(0.5, 0.1, 0.025, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.4875, 0.25);
+			fig1.prisma(0.025, 0.1, 0.5, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0, 0.25, 0.25);
+			fig1.prisma(0.025, 0.1, 0.5, text1);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void CFiguras::lampara(GLuint text1, GLuint text2) {
+	CFiguras fig1;
+	
+	glTranslatef(0.0, 0.025, 0.0);
+	fig1.cilindro(0.15,0.05,20,text1);
+	glPushMatrix();
+		glTranslatef(0.0,0.05,0.0);
+		fig1.cilindro(0.1,3.0,20,text1);
+		glPushMatrix();
+			glTranslatef(0.0, 3.0, 0.0);
+			glPushMatrix();
+				glRotatef(180,1,0,0);
+				fig1.cono(0.20,0.15,20,text1);
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0.0, 0.15, 0.0);
+				fig1.esfera(0.20,20,20,text2);
+				glPushMatrix();
+					glTranslatef(0.0, 0.15, 0.0);
+					fig1.cono(0.10, 0.15, 20, text1);
+					glPushMatrix();
+						glTranslatef(0.0, 0.1, 0.0);
+						glRotatef(90,1,0,0);
+						fig1.torus(0.07,0.05,20,20);
+					glPopMatrix();
+				glPopMatrix();
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void CFiguras::bote(GLuint text1) {
+	float altura = 1.0, largo = 0.5, profundidad= 0.5;
+
+	GLfloat vertice[8][3] = {
+				{0.5*largo ,-0.5*altura, 0.5*profundidad},    //Coordenadas V�rtice 1 V1
+				{-0.5*largo ,-0.5*altura , 0.5*profundidad},    //Coordenadas V�rtice 2 V2
+				{-0.5*largo ,-0.5*altura , -0.5*profundidad},    //Coordenadas V�rtice 3 V3
+				{0.5*largo ,-0.5*altura , -0.5*profundidad},    //Coordenadas V�rtice 4 V4
+				{0.5*largo ,0.5*altura , 0.5*profundidad},    //Coordenadas V�rtice 5 V5
+				{0.5*largo ,0.5*altura , -0.5*profundidad},    //Coordenadas V�rtice 6 V6
+				{-0.5*largo ,0.5*altura , -0.5*profundidad},    //Coordenadas V�rtice 7 V7
+				{-0.5*largo ,0.5*altura , 0.5*profundidad},    //Coordenadas V�rtice 8 V8
+	};
+
+	glBindTexture(GL_TEXTURE_2D, text1);   // choose the texture to use.
+	glBegin(GL_POLYGON);	//Front
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[0]);
+		glTexCoord2f(0.0f, 1.0f); glVertex3fv(vertice[4]);
+		glTexCoord2f(1.0f, 1.0f); glVertex3fv(vertice[7]);
+		glTexCoord2f(1.0f, 0.0f); glVertex3fv(vertice[1]);
+	glEnd();
+
+	glBegin(GL_POLYGON);	//Right
+		//glColor3f(0.0,0.0,1.0);
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[0]);
+		glTexCoord2f(1.0f, 0.0f); glVertex3fv(vertice[3]);
+		glTexCoord2f(1.0f, 1.0f); glVertex3fv(vertice[5]);
+		glTexCoord2f(0.0f, 1.0f); glVertex3fv(vertice[4]);
+	glEnd();
+
+	glBegin(GL_POLYGON);	//Back
+		glNormal3f(0.0f, 0.0f, -1.0f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3fv(vertice[6]);
+		glTexCoord2f(1.0f, 1.0f); glVertex3fv(vertice[5]);
+		glTexCoord2f(1.0f, 0.0f); glVertex3fv(vertice[3]);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[2]);
+	glEnd();
+
+	glBegin(GL_POLYGON);  //Left
+		//glColor3f(1.0,1.0,1.0);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3fv(vertice[1]);
+		glTexCoord2f(1.0f, 1.0f); glVertex3fv(vertice[7]);
+		glTexCoord2f(0.0f, 1.0f); glVertex3fv(vertice[6]);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[2]);
+	glEnd();
+
+	glBegin(GL_POLYGON);  //Bottom
+		glNormal3f(0.0f, -1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[0]);
+		glTexCoord2f(1.0f, 0.0f); glVertex3fv(vertice[1]);
+		glTexCoord2f(1.0f, 1.0f); glVertex3fv(vertice[2]);
+		glTexCoord2f(0.0f, 1.0f); glVertex3fv(vertice[3]);
+	glEnd();
+}
+
+void CFiguras::botes(GLuint text1, GLuint text2, GLuint text3) {
+	CFiguras fig1;
+	//barra izquierda
+	glPushMatrix();
+		glTranslatef(-0.675, 0.55, 0.0);
+		fig1.prisma(1.1,0.05,0.1,text1);
+	glPopMatrix();
+	//barra de union entre bote verde y barra izquierda
+	glPushMatrix();
+		glTranslatef(-0.60, 0.65, 0.0);
+		fig1.prisma(0.05, 0.1, 0.05, text1);
+	glPopMatrix();
+	//bote verde
+	glPushMatrix();
+		glTranslatef(-0.3, 0.65, 0.0);
+		fig1.bote(text2);
+	glPopMatrix();
+	//barra de union entre bote verde y bote gris
+	glPushMatrix();
+		glTranslatef(0.0, 0.65, 0.0);
+		fig1.prisma(0.05, 0.1, 0.05, text1);
+	glPopMatrix();
+	//bote gris
+	glPushMatrix();
+		glTranslatef(0.3, 0.65, 0.0);
+		fig1.bote(text3);
+	glPopMatrix();
+	//barra de union entre bote gris y barra derecha
+	glPushMatrix();
+		glTranslatef(0.60, 0.65, 0.0);
+		fig1.prisma(0.05, 0.1, 0.05, text1);
+	glPopMatrix();
+	//barra derecha
+	glPushMatrix();
+		glTranslatef(0.675, 0.55, 0.0);
+		fig1.prisma(1.1, 0.05, 0.1, text1);
+	glPopMatrix();
+}
+
+

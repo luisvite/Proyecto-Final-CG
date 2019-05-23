@@ -33,4 +33,9 @@ class CFiguras
 	void JM4(GLuint n, GLuint parednaranja, GLuint circo, GLuint paredgris1, GLuint rojo, GLuint paredamarilla, GLuint paredgris2, int rot);
 	void Fortuna(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1, GLuint text2, GLuint text3, int rot);
 	void Car(GLuint text1, GLuint text2, int rot);
+	void Banca(GLuint text1, GLuint text2);
+	void lampara(GLuint text1, GLuint text2);
+	void bote(GLuint text1);
+	void botes(GLuint text1, GLuint text2, GLuint text3);
+
 };
