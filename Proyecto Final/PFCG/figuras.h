@@ -29,8 +29,8 @@ class CFiguras
 	void riel4(GLuint text1);
 	void JM1(GLuint rojo, GLuint paredamarilla, GLuint parednaranja, GLuint n, GLuint text2, GLuint paredgris2, GLuint t_ESFERA2, int rot1);
 	void JM2(GLuint paredgris1, GLuint paredgris2, GLuint tasas, GLuint rojo, GLuint paredamarilla, GLuint n, int rot, int rot2);
-	void JM3(GLuint t_MADERA2, GLuint paredamarilla, GLuint tasas, GLuint paredgris1, GLuint circo, int rot1);
+	void JM3(GLuint t_MADERA2, GLuint paredamarilla, GLuint tasas, GLuint paredgris1, GLuint circo, int rot1, int rot2);
 	void JM4(GLuint n, GLuint parednaranja, GLuint circo, GLuint paredgris1, GLuint rojo, GLuint paredamarilla, GLuint paredgris2, int rot);
 	void Fortuna(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos, GLuint text1, GLuint text2, GLuint text3, int rot);
-
+	void Car(GLuint text1, GLuint text2, int rot);
 };

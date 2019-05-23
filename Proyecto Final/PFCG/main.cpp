@@ -28,6 +28,8 @@ CTexture text4; //Base metalica 2
 CTexture text5; //Base metalica 3
 CTexture text6; //Base metalica para montaña
 CTexture text7; //Base metalica para rueda fortuna
+CTexture text8;
+CTexture text9;
 CTexture t_ESFERA1;
 CTexture t_MADERA2;
 CTexture t_ESFERA2;
@@ -51,6 +53,7 @@ CFiguras fig4; //fig para crear el tercer juego
 CFiguras fig5; //fig para crear cuarto juego
 CFiguras fortuna;
 CFiguras mountain; //fig para crear la montaña rusa
+CFiguras car;
 
 // Variables usadas para calcular frames por segundo: (Windows)
 DWORD dwFrames = 0;
@@ -59,21 +62,27 @@ DWORD dwLastUpdateTime_1 = 0;
 DWORD dwLastUpdateTime2 = 0;
 DWORD dwLastUpdateTime2_2 = 0;
 DWORD dwLastUpdateTime3 = 0;
+DWORD dwLastUpdateTime3_2 = 0;
 DWORD dwLastUpdateTime4 = 0;
 DWORD dwLastUpdateTime5 = 0;
 DWORD dwLastUpdateTime6 = 0;
+DWORD dwLastUpdateTime7 = 0;
+DWORD dwLastUpdateTime8 = 0;
 DWORD dwElapsedTime_1 = 0;
 DWORD dwElapsedTime2 = 0;
 DWORD dwElapsedTime2_2 = 0;
 DWORD dwElapsedTime3 = 0;
+DWORD dwElapsedTime3_2 = 0;
 DWORD dwElapsedTime4 = 0;
 DWORD dwElapsedTime5 = 0;
 DWORD dwElapsedTime6 = 0;
+DWORD dwElapsedTime7 = 0;
+DWORD dwElapsedTime8 = 0;
 
 //Variables usadas para crear el movimiento
-int rot1_1 = 0, rot2 = 0, rot2_2 = 0, rot3 = 0, rot4 = 0, rot5 = 0, rot6 = 0;
+int rot1_1 = 0, rot2 = 0, rot2_2 = 0, rot3 = 0, rot3_2 = 0, rot4 = 0, rot5 = 0, rot6 = 0;
 int aux1_1 = 0, aux2_1 = 0, aux3_1 = 0, aux4_1 = 0, aux5_1=0;
-int anim1 = 0, anim2 = 0, anim3 = 0, anim4 = 0, anim5 = 0, anim6 = 0;
+int anim1 = 0, anim2 = 0, anim3 = 0, anim4 = 0, anim5 = 0, anim6 = 0, anim7 = 0, anim8 = 0;
 int t = 0;
 
 void InitGL(GLvoid) {
@@ -123,6 +132,14 @@ void InitGL(GLvoid) {
 	text7.LoadTGA("textura/metal_green.tga");
 	text7.BuildGLTexture();
 	text7.ReleaseImage();
+
+	text8.LoadTGA("textura/metal_red.tga");
+	text8.BuildGLTexture();
+	text8.ReleaseImage();
+
+	text9.LoadTGA("textura/mat_purple.tga");
+	text9.BuildGLTexture();
+	text9.ReleaseImage();
 
 	t_ESFERA1.LoadTGA("textura/ESFERA1.tga");
 	t_ESFERA1.BuildGLTexture();
@@ -213,7 +230,7 @@ void display(void) {
 		//Dibujando tercer juego mecanico
 		glPushMatrix();
 			glTranslatef(20.0, 0.0, 15.0);
-			fig4.JM3(t_MADERA2.GLindex, paredamarilla.GLindex, tasas.GLindex, paredgris1.GLindex, circo.GLindex, rot3);
+			fig4.JM3(t_MADERA2.GLindex, paredamarilla.GLindex, tasas.GLindex, paredgris1.GLindex, circo.GLindex, rot3, rot3_2);
 		glPopMatrix();
 		//Dibujando cuarto juego mecanico
 		glPushMatrix();
@@ -230,6 +247,10 @@ void display(void) {
 			glTranslatef(0.0,0.0,-10.0);
 			mountain.rollercoaster(text3.GLindex, text4.GLindex, text5.GLindex, text6.GLindex);
 		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0.0, 0.65, -12.2);
+			car.Car(text8.GLindex, text9.GLindex, rot6);
+		glPopMatrix();
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -244,6 +265,7 @@ void animacion()
 	dwElapsedTime2 = dwCurrentTime - dwLastUpdateTime2;
 	dwElapsedTime2_2 = dwCurrentTime - dwLastUpdateTime2_2;
 	dwElapsedTime3 = dwCurrentTime - dwLastUpdateTime3;
+	dwElapsedTime3_2 = dwCurrentTime - dwLastUpdateTime3_2;
 	dwElapsedTime4 = dwCurrentTime - dwLastUpdateTime4;
 	dwElapsedTime5 = dwCurrentTime - dwLastUpdateTime5;
 	dwElapsedTime6 = dwCurrentTime - dwLastUpdateTime6;
@@ -262,6 +284,7 @@ void animacion()
 				}
 			}else {
 				anim1 = 0;
+				aux1_1 = 0;
 			}
 		}
 	}
@@ -285,6 +308,7 @@ void animacion()
 			}
 			else {
 				anim2 = 0;
+				aux2_1 = 0;
 			}
 		}
 	}
@@ -294,15 +318,21 @@ void animacion()
 	{
 		if (dwElapsedTime3 >= 50)
 		{
-			if (rot3 <= 356 && aux3_1 < 3) {
-				rot3 = (rot3 + 4) % 360;
-				dwLastUpdateTime3 = dwCurrentTime;
-				if (rot3 == 0) {
+			rot3 = (rot3 + 4) % 360;
+			dwLastUpdateTime3 = dwCurrentTime;
+		}
+		if (dwElapsedTime3_2 >= 50)
+		{
+			if (rot3_2 <= 355 && aux3_1 < 3) {
+				rot3_2 = (rot3_2 + 5) % 360;
+				dwLastUpdateTime3_2 = dwCurrentTime;
+				if (rot3_2 == 0) {
 					aux3_1 = aux3_1 + 1;
 				}
 			}
 			else {
 				anim3 = 0;
+				aux3_1 = 0;
 			}
 		}
 	}
@@ -321,6 +351,7 @@ void animacion()
 			}
 			else {
 				anim4 = 0;
+				aux4_1 = 0;
 			}
 		}
 	}
@@ -338,11 +369,21 @@ void animacion()
 				}
 			}else{
 				anim5 = 0;
+				aux5_1 = 0;
 			}
 		}
 	}
-
-	glutPostRedisplay();
+	
+	//animacion 6
+	if (anim6 == 1)
+	{
+		if (dwElapsedTime6 >= 10)
+		{
+			rot6 = (rot6 + 10) % 360;
+			dwLastUpdateTime6 = dwCurrentTime;
+		}
+	}
+	
 }
 
 void reshape(int width, int height)   // Creamos funcion Reshape
@@ -398,6 +439,15 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 				anim2 = 0;
 			}
 			break;
+		case '3':
+			if (anim3 == 0)
+			{
+				anim3 = 1;
+			}
+			else {
+				anim3 = 0;
+			}
+			break;
 		case '4':
 			if (anim4 == 0)
 			{
@@ -414,6 +464,15 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 			}
 			else {
 				anim5 = 0;
+			}
+			break;
+		case '6':
+			if (anim6 == 0)
+			{
+				anim6 = 1;
+			}
+			else {
+				anim6 = 0;
 			}
 			break;
 		case 27:        // Cuando Esc es presionado...

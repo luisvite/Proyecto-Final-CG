@@ -1814,67 +1814,61 @@ void CFiguras::JM2(GLuint paredgris1, GLuint paredgris2, GLuint tasas, GLuint ro
 	glPopMatrix();
 }
 
-void CFiguras::JM3(GLuint t_MADERA2, GLuint paredamarilla, GLuint tasas, GLuint paredgris1, GLuint circo, int rot1) {
+void CFiguras::JM3(GLuint t_MADERA2, GLuint paredamarilla, GLuint tasas, GLuint paredgris1, GLuint circo, int rot1, int rot2) {
 	CFiguras fig1; //FIGURA AUXILIAR
 
-	glPushMatrix();     //BASE
+	glPushMatrix();   
 		glTranslatef(0.0f, 0.0f, 20.0f);
-		fig1.cilindro(5.0, 0.5, 30, t_MADERA2);
-	glPopMatrix();
-
-	glPushMatrix();     //BASE PARA LA TASA1
-		glTranslatef(2.0f, 0.5f, 20.0f);
-		fig1.cilindro(1.0, 0.2, 30, paredamarilla);
-	glPopMatrix();
-
-	glPushMatrix();     //BASE PARA LA TASA2
-		glTranslatef(-2.0f, 0.5f, 20.0f);
-		fig1.cilindro(1.0, 0.2, 30, paredamarilla);
-	glPopMatrix();
-
-	glPushMatrix();     //BASE PARA LA TASA3
-		glTranslatef(0.0f, 0.5f, 23.0f);
-		fig1.cilindro(1.0, 0.2, 30, paredamarilla);
-	glPopMatrix();
-
-	glPushMatrix();     //BASE PARA LA TASA4
-		glTranslatef(0.0f, 0.5f, 17.0f);
-		fig1.cilindro(1.0, 0.2, 30, paredamarilla);
-	glPopMatrix();
-
-	glPushMatrix();    //TASA1
-		glTranslatef(-2.0f, 1.5f, 20.0f);
-		glScalef(3.2, -0.35, 3.2);
-		fig1.cono(2.0, 0.4, 100, tasas);
-	glPopMatrix();
-
-	glPushMatrix();    //TASA2
-		glTranslatef(2.0f, 1.5f, 20.0f);
-		glScalef(3.2, -0.35, 3.2);
-		fig1.cono(2.0, 0.4, 100, tasas);
-	glPopMatrix();
-
-	glPushMatrix();    //TASA3
-		glTranslatef(0.0f, 1.5f, 23.0f);
-		glScalef(3.2, -0.35, 3.2);
-		fig1.cono(2.0, 0.4, 100, tasas);
-	glPopMatrix();
-
-	glPushMatrix();    //TASA3
-		glTranslatef(0.0f, 1.5f, 17.0f);
-		glScalef(3.2, -0.35, 3.2);
-		fig1.cono(2.0, 0.4, 100, tasas);
-	glPopMatrix();
-
-	glPushMatrix();     //BARRA 
-		glTranslatef(0.0f, 0.0f, 20.0f);
+		fig1.cilindro(5.0, 0.5, 30, t_MADERA2);	//BASE
 		fig1.cilindro(0.3, 7.0, 30, paredgris1);
-	glPopMatrix();
-
-	glPushMatrix();    //TECHO
-		glTranslatef(0.0f, 7.0f, 20.0f);
-		glScalef(15.2, 0.45, 10.2);
-		fig1.cono(2.0, 0.4, 100, circo);
+		glPushMatrix();    //TECHO
+			glTranslatef(0.0f, 7.0f, 0.0f);
+			glScalef(15.2, 0.45, 10.2);
+			fig1.cono(2.0, 0.4, 100, circo);
+		glPopMatrix();
+		//animacion
+		glRotatef(rot2,0,1,0);
+		//dibujado de tazas
+		glPushMatrix();//BASE PARA LA TASA1
+			glTranslatef(2.0f, 0.5f, 0.0f);
+			fig1.cilindro(1.0, 0.2, 30, paredamarilla);
+			glPushMatrix();    //TASA1
+				glTranslatef(0.0f, 1.0f, 0.0f);
+				glScalef(3.2, -0.35, 3.2);
+				glRotatef(rot1, 0, 1, 0);
+				fig1.cono(2.0, 0.4, 100, tasas);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();     //BASE PARA LA TASA2
+			glTranslatef(-2.0f, 0.5f, 0.0f);
+			fig1.cilindro(1.0, 0.2, 30, paredamarilla);
+			glPushMatrix();    //TASA2
+				glTranslatef(0.0f, 1.0f, 0.0f);
+				glRotatef(rot1, 0, 1, 0);
+				glScalef(3.2, -0.35, 3.2);
+				fig1.cono(2.0, 0.4, 100, tasas);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();     //BASE PARA LA TASA3
+			glTranslatef(0.0f, 0.5f, 3.0f);
+			fig1.cilindro(1.0, 0.2, 30, paredamarilla);
+			glPushMatrix();    //TASA3
+				glTranslatef(0.0f, 1.0f, 0.0f);
+				glRotatef(rot1, 0, 1, 0);
+				glScalef(3.2, -0.35, 3.2);
+				fig1.cono(2.0, 0.4, 100, tasas);
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();     //BASE PARA LA TASA4
+			glTranslatef(0.0f, 0.5f, -3.0f);
+			fig1.cilindro(1.0, 0.2, 30, paredamarilla);
+			glPushMatrix();    //TASA4
+				glTranslatef(0.0f, 1.0f, 0.0f);
+				glRotatef(rot1, 0, 1, 0);
+				glScalef(3.2, -0.35, 3.2);
+				fig1.cono(2.0, 0.4, 100, tasas);
+			glPopMatrix();
+		glPopMatrix();
 	glPopMatrix();
 }
 
@@ -2281,5 +2275,41 @@ void CFiguras::Fortuna(GLfloat radioM, GLfloat radiom, int meridianos, int paral
 				glPopMatrix();
 			glPopMatrix();
 		}
+	glPopMatrix();
+}
+
+void CFiguras::Car(GLuint text1, GLuint text2, int rot) {
+	CFiguras fig1;
+	glPushMatrix();
+		//llantas
+		glPushMatrix();
+			glTranslatef(1.0, 0.05, 0.0);
+			glRotatef(90,1,0,0);
+			glRotatef(-rot,0,1,0);
+			fig1.cilindro(0.15,0.05,20,text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-1.0, 0.05, 0.0);
+			glRotatef(90, 1, 0, 0);
+			glRotatef(-rot, 0, 1, 0);
+			fig1.cilindro(0.15, 0.05, 20, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(1.0, 0.05, -1.25);
+			glRotatef(90, 1, 0, 0);
+			glRotatef(-rot, 0, 1, 0);
+			fig1.cilindro(0.15, 0.05, 20, text1);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-1.0, 0.05, -1.25);
+			glRotatef(90, 1, 0, 0);
+			glRotatef(-rot, 0, 1, 0);
+			fig1.cilindro(0.15, 0.05, 20, text1);
+		glPopMatrix();
+		//car
+		glPushMatrix();
+			glTranslatef(0.0, 0.80, -0.625);
+			fig1.prisma(1.75,4,1.05,text2);
+		glPopMatrix();
 	glPopMatrix();
 }
