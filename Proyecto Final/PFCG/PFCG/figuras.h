@@ -19,6 +19,7 @@ class CFiguras
 	void prisma_anun (GLuint text, GLuint text2);							//Func�on creacion movimiento
 	void prisma (float altura, float largo, float profundidad, GLuint text);//Func�on creacion prisma
 	void prisma2 (GLuint text, GLuint text2);
+	void prisma3(float altura, float largo, float profundidad, GLuint text);
 	void skybox(float altura, float largo, float profundidad, GLuint text, GLuint text1);	//Funcion creacion cielo
 	void skybox2 (float altura, float largo, float profundidad, GLuint text);
 	void torus(GLfloat radioM, GLfloat radiom, int meridianos, int paralelos);
@@ -37,5 +38,6 @@ class CFiguras
 	void lampara(GLuint text1, GLuint text2);
 	void bote(GLuint text1);
 	void botes(GLuint text1, GLuint text2, GLuint text3);
+	void contorno(GLuint text1, GLuint text2, GLuint text3);
 
 };

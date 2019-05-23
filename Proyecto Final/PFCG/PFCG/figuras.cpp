@@ -251,6 +251,68 @@ void CFiguras::prisma2 (GLuint text, GLuint text2)  //Funcion creacion prisma
 		glEnd();
 }
 
+void CFiguras::prisma3(float altura, float largo, float profundidad, GLuint text) {
+	GLfloat vertice[8][3] = {
+				{0.5*largo ,-0.5*altura, 0.5*profundidad},    //Coordenadas V�rtice 1 V1
+				{-0.5*largo ,-0.5*altura , 0.5*profundidad},    //Coordenadas V�rtice 2 V2
+				{-0.5*largo ,-0.5*altura , -0.5*profundidad},    //Coordenadas V�rtice 3 V3
+				{0.5*largo ,-0.5*altura , -0.5*profundidad},    //Coordenadas V�rtice 4 V4
+				{0.5*largo ,0.5*altura , 0.5*profundidad},    //Coordenadas V�rtice 5 V5
+				{0.5*largo ,0.5*altura , -0.5*profundidad},    //Coordenadas V�rtice 6 V6
+				{-0.5*largo ,0.5*altura , -0.5*profundidad},    //Coordenadas V�rtice 7 V7
+				{-0.5*largo ,0.5*altura , 0.5*profundidad},    //Coordenadas V�rtice 8 V8
+	};
+
+	glBindTexture(GL_TEXTURE_2D, text);   // choose the texture to use.
+	glBegin(GL_POLYGON);	//Front
+		glNormal3f(0.0f, 0.0f, 1.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[0]);
+		glTexCoord2f(0.0f, (1 * largo)); glVertex3fv(vertice[4]);
+		glTexCoord2f((1 * altura), (1 * largo)); glVertex3fv(vertice[7]);
+		glTexCoord2f((1 * altura), 0.0f); glVertex3fv(vertice[1]);
+	glEnd();
+
+	glBegin(GL_POLYGON);	//Right
+		glNormal3f(1.0f, 0.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);  glVertex3fv(vertice[0]);
+		glTexCoord2f((1 * altura), 0.0f); glVertex3fv(vertice[3]);
+		glTexCoord2f((1 * altura), (1 * largo)); glVertex3fv(vertice[5]);
+		glTexCoord2f(0.0f, (1 * largo)); glVertex3fv(vertice[4]);
+	glEnd();
+
+	glBegin(GL_POLYGON);	//Back
+		glNormal3f(0.0f, 0.0f, -1.0f);
+		glTexCoord2f(0.0f, (1 * largo)); glVertex3fv(vertice[6]);
+		glTexCoord2f((1 * altura), (1 * largo)); glVertex3fv(vertice[5]);
+		glTexCoord2f((1 * altura), 0.0f); glVertex3fv(vertice[3]);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[2]);
+	glEnd();
+
+	glBegin(GL_POLYGON);  //Left
+		glNormal3f(-1.0f, 0.0f, 0.0f);
+		glTexCoord2f((1 * altura), 0.0f); glVertex3fv(vertice[1]);
+		glTexCoord2f((1 * altura), (1 * largo)); glVertex3fv(vertice[7]);
+		glTexCoord2f(0.0f, (1 * largo)); glVertex3fv(vertice[6]);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[2]);
+	glEnd();
+
+	glBegin(GL_POLYGON);  //Bottom
+		glNormal3f(0.0f, -1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[0]);
+		glTexCoord2f((1 * altura), 0.0f); glVertex3fv(vertice[1]);
+		glTexCoord2f((1 * altura), (1 * largo)); glVertex3fv(vertice[2]);
+		glTexCoord2f(0.0f, (1 * largo)); glVertex3fv(vertice[3]);
+	glEnd();
+
+	glBegin(GL_POLYGON);  //Top
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[4]);
+		glTexCoord2f((1 * altura), 0.0f); glVertex3fv(vertice[5]);
+		glTexCoord2f((1 * altura), (1 * largo)); glVertex3fv(vertice[6]);
+		glTexCoord2f(0.0f, (1 * largo)); glVertex3fv(vertice[7]);
+	glEnd();
+}
+
 void CFiguras::prisma_anun (GLuint text, GLuint text2)  //Funcion creacion prisma
 {
 
@@ -2413,7 +2475,7 @@ void CFiguras::lampara(GLuint text1, GLuint text2) {
 	fig1.cilindro(0.15,0.05,20,text1);
 	glPushMatrix();
 		glTranslatef(0.0,0.05,0.0);
-		fig1.cilindro(0.1,3.0,20,text1);
+		fig1.cilindro(0.1,3.0,10,text1);
 		glPushMatrix();
 			glTranslatef(0.0, 3.0, 0.0);
 			glPushMatrix();
@@ -2531,6 +2593,103 @@ void CFiguras::botes(GLuint text1, GLuint text2, GLuint text3) {
 	glPushMatrix();
 		glTranslatef(0.675, 0.55, 0.0);
 		fig1.prisma(1.1, 0.05, 0.1, text1);
+	glPopMatrix();
+}
+
+void CFiguras::contorno(GLuint text1, GLuint text2, GLuint text3) {
+	CFiguras fig1;
+	//Dibujando acera
+	glPushMatrix();
+		glTranslatef(5.125, 0.0, 53.0);
+		fig1.prisma(0.05,0.05,24,text1);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-5.125, 0.0, 53.0);
+		fig1.prisma(0.05, 0.05, 24, text1);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(35.05, 0.0, 41.025);
+		fig1.prisma(0.05, 59.9, 0.05, text1);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-35.05, 0.0, 41.025);
+		fig1.prisma(0.05, 59.9, 0.05, text1);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(42.55, 0.0, 36.025);
+		fig1.prisma(0.05, 44.9, 0.05, text1);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-45.05, 0.0, 36.025);
+		fig1.prisma(0.05, 39.9, 0.05, text1);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(20.1, 0.0, 20.5625);
+		fig1.prisma(0.05, 0.05, 30.975, text1);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-25.1, 0.0, 18);
+		fig1.prisma(0.05, 0.05, 36.00, text1);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(42.55, 0.0, 5.1);
+		fig1.prisma(0.05, 44.9, 0.05, text1);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(19.95, 0.0, -5.1);
+		fig1.prisma(0.05, 90.1, 0.05, text1);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(-25.1, 0.0, -35.05);
+		fig1.prisma(0.05, 0.05, 59.95, text1);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-35.1, 0.0, -40.05);
+		fig1.prisma(0.05, 0.05, 49.9, text1);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(-45.05, 0.0, 0.025);
+		fig1.prisma(0.05, 39.9, 0.05, text1);
+	glPopMatrix();
+	glPushMatrix();
+		glTranslatef(-50.05, 0.0, -15.1);
+		fig1.prisma(0.05, 29.95, 0.05, text1);
+	glPopMatrix();
+	//Dibujando piso
+	glPushMatrix();
+		glTranslatef(0.0, 0.0, 53.0);
+		fig1.prisma3(0.01, 10.25, 24, text2);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(0.0, 0.0, 38.525);
+		fig1.prisma3(0.01, 130.25, 5, text2);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(-2.5, 0.0, 20.5625);
+		fig1.prisma3(0.01, 45.2, 30.975, text2);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(19.95, 0.0, 0.0);
+		fig1.prisma3(0.01, 90.1, 10.2, text2);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(-30.1, 0.0, -32.5);
+		fig1.prisma3(0.01, 10.0, 65.0, text2);
+	glPopMatrix();
+	//
+	glPushMatrix();
+		glTranslatef(-50.05, 0.0, -7.55);
+		fig1.prisma3(0.01, 29.95, 15.1, text2);
 	glPopMatrix();
 }
 

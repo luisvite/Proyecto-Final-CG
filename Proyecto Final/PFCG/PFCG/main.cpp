@@ -35,6 +35,10 @@ CTexture text11; //madera para las bancas
 CTexture text12; //Metal para la lampara
 CTexture text13; //esfera de la lampara
 CTexture text14; //Metal para bote gris
+CTexture text15; //acera
+CTexture text16; //piso
+CTexture text17; //follage
+CTexture text18; //tapa
 
 CTexture t_ESFERA1;
 CTexture t_MADERA2;
@@ -63,6 +67,7 @@ CFiguras Botes;
 CFiguras fortuna;
 CFiguras mountain; //fig para crear la montaña rusa
 CFiguras car;
+CFiguras contorno;
 
 // Variables usadas para calcular frames por segundo: (Windows)
 DWORD dwFrames = 0;
@@ -170,6 +175,22 @@ void InitGL(GLvoid) {
 	text14.BuildGLTexture();
 	text14.ReleaseImage();
 
+	text15.LoadTGA("textura/acera.tga");
+	text15.BuildGLTexture();
+	text15.ReleaseImage();
+
+	text16.LoadTGA("textura/floor.tga");
+	text16.BuildGLTexture();
+	text16.ReleaseImage();
+
+	text17.LoadTGA("textura/follage.tga");
+	text17.BuildGLTexture();
+	text17.ReleaseImage();
+
+	text18.LoadTGA("textura/tapa.tga");
+	text18.BuildGLTexture();
+	text18.ReleaseImage();
+
 	t_ESFERA1.LoadTGA("textura/ESFERA1.tga");
 	t_ESFERA1.BuildGLTexture();
 	t_ESFERA1.ReleaseImage();
@@ -246,45 +267,65 @@ void display(void) {
 			fig1.skybox(130.0, 100.0, 130.0, text1.GLindex, text2.GLindex); //altura, largo, profundidad
 			glEnable(GL_LIGHTING);
 		glPopMatrix();
-		//Dibujando primer juego mecanico
-		glPushMatrix();
-			glTranslatef(-75.0, 0.0, -50.0);
-			fig2.JM1(rojo.GLindex, paredamarilla.GLindex, parednaranja.GLindex, n.GLindex, text2.GLindex, paredgris2.GLindex, t_ESFERA2.GLindex,rot1_1);
-		glPopMatrix();
-		//Dibujando segundo juego mecanico
-		glPushMatrix();
-			glTranslatef(-20.0, 0.0, 10.0);
-			fig3.JM2(paredgris1.GLindex, paredgris2.GLindex,tasas.GLindex, rojo.GLindex, paredamarilla.GLindex, n.GLindex, rot2, rot2_2);
-		glPopMatrix();
-		//Dibujando tercer juego mecanico
-		glPushMatrix();
-			glTranslatef(40.0, 0.0, 30.0);
-			fig4.JM3(t_MADERA2.GLindex, paredamarilla.GLindex, tasas.GLindex, paredgris1.GLindex, circo.GLindex, rot3, rot3_2);
-		glPopMatrix();
-		//Dibujando cuarto juego mecanico
-		glPushMatrix();
-			glTranslatef(-20.0, 0.0, 35.0);
-			glRotatef(135, 0,1,0);
-			fig5.JM4(n.GLindex, parednaranja.GLindex, circo.GLindex, paredgris1.GLindex, rojo.GLindex, paredamarilla.GLindex, paredgris1.GLindex, rot4);
-		glPopMatrix();
-		//Dibujando rueda fortuna
-		glPushMatrix();
-			glTranslatef(40.0, 0.0, 20.0);
-			fortuna.Fortuna(10,9.5,10,10, text7.GLindex, text3.GLindex, text4.GLindex, rot5);
-		glPopMatrix();
-		//Dibujando Montaña Rusa
-		glPushMatrix();
-			glTranslatef(10.0, 0.0,-15.0);
-			mountain.rollercoaster(text3.GLindex, text4.GLindex, text5.GLindex, text6.GLindex);
-		glPopMatrix();
-		//dibujando car de la montaña rusa
-		glPushMatrix();
-			glTranslatef(10.0, 0.65, -17.2);
-			car.Car(text8.GLindex, text9.GLindex, rot6);
-		glPopMatrix();
 		//Dibujando Bancas
 		glPushMatrix();
-			glTranslatef(-1,0,-5);
+			glTranslatef(-1, 0, -5.0);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-31, 0, -64.5);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-50, 0, -15);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-54, 0, -15);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-50, 0, -0.1);
+			glRotatef(180,0,1,0);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-54, 0, -0.1);
+			glRotatef(180, 0, 1, 0);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(5, 0, 51);
+			glRotatef(-90, 0, 1, 0);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(5, 0, 55);
+			glRotatef(-90, 0, 1, 0);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-5, 0, 51);
+			glRotatef(90, 0, 1, 0);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-5, 0, 55);
+			glRotatef(90, 0, 1, 0);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(40, 0, -5);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(40, 0, 5);
+			glRotatef(180, 0, 1, 0);
+			Banca.Banca(text10.GLindex, text11.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(64, 0, 0);
+			glRotatef(-90, 0, 1, 0);
 			Banca.Banca(text10.GLindex, text11.GLindex);
 		glPopMatrix();
 		//Dibujando lamparas
@@ -292,10 +333,150 @@ void display(void) {
 			glTranslatef(2.2, 0, -5);
 			Lampara.lampara(text12.GLindex, text13.GLindex);
 		glPopMatrix();
-		//Dibujando Botes de basuratext 10,13 y 14
 		glPushMatrix();
-			glTranslatef(-3.0,0,-5);
+			glTranslatef(41.0, 0, 5);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(39.0, 0, -5);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(4.9, 0, 41);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-4.9, 0, 41);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-25.0, 0, 36.15);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(19.9, 0, 36.15);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(60.0, 0, 36.2);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-60.0, 0, 41.0);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(19.9, 0, 4.9);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-25.0, 0, -4.8);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-51.0, 0, -14.9);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-53.0, 0, -0.2);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		//banca solita
+		glPushMatrix();
+			glTranslatef(-34.9, 0, -54.0);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-34.9, 0, -20.0);
+			Lampara.lampara(text12.GLindex, text13.GLindex);
+		glPopMatrix();
+		//Dibujando Botes de basura
+		glPushMatrix();
+			glTranslatef(-3.0, 0, -5.3);
 			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(4.8, 0, 44);
+			glRotatef(-90,0,1,0);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-35.0, 0, 36.30);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(37.5, 0, 40.70);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-24.8, 0, 18.0);
+			glRotatef(-90, 0, 1, 0);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(19.8, 0, 20.56);
+			glRotatef(-90, 0, 1, 0);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+		//
+		glPushMatrix();
+			glTranslatef(35.0, 0, 4.7);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-45.0, 0, -0.35);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(-34.8, 0, -40.0);
+			glRotatef(-90, 0, 1, 0);
+			Botes.botes(text10.GLindex, text12.GLindex, text14.GLindex);
+		glPopMatrix();
+
+		//Dibujando piso, acera
+		contorno.contorno(text15.GLindex, text16.GLindex, text18.GLindex);
+
+		//Dibujando primer juego mecanico
+		glPushMatrix();
+			glTranslatef(-75.0, 0.0, -50.0);
+			fig2.JM1(rojo.GLindex, paredamarilla.GLindex, parednaranja.GLindex, n.GLindex, text2.GLindex, paredgris2.GLindex, t_ESFERA2.GLindex,rot1_1);
+		glPopMatrix();
+
+		//Dibujando segundo juego mecanico
+		glPushMatrix();
+			glTranslatef(-20.0, 0.0, 10.0);
+			fig3.JM2(paredgris1.GLindex, paredgris2.GLindex,tasas.GLindex, rojo.GLindex, paredamarilla.GLindex, n.GLindex, rot2, rot2_2);
+		glPopMatrix();
+
+		//Dibujando tercer juego mecanico
+		glPushMatrix();
+			glTranslatef(40.0, 0.0, 30.0);
+			fig4.JM3(t_MADERA2.GLindex, paredamarilla.GLindex, tasas.GLindex, paredgris1.GLindex, circo.GLindex, rot3, rot3_2);
+		glPopMatrix();
+
+		//Dibujando cuarto juego mecanico
+		glPushMatrix();
+			glTranslatef(-20.0, 0.0, 35.0);
+			glRotatef(135, 0,1,0);
+			fig5.JM4(n.GLindex, parednaranja.GLindex, circo.GLindex, paredgris1.GLindex, rojo.GLindex, paredamarilla.GLindex, paredgris1.GLindex, rot4);
+		glPopMatrix();
+
+		//Dibujando rueda fortuna
+		glPushMatrix();
+			glTranslatef(40.0, 0.0, 20.0);
+			fortuna.Fortuna(10,9.5,10,10, text7.GLindex, text3.GLindex, text4.GLindex, rot5);
+		glPopMatrix();
+
+		//Dibujando Montaña Rusa
+		glPushMatrix();
+			glTranslatef(10.0, 0.0,-15.0);
+			mountain.rollercoaster(text3.GLindex, text4.GLindex, text5.GLindex, text6.GLindex);
+		glPopMatrix();
+
+		//dibujando car de la montaña rusa
+		glPushMatrix();
+			glTranslatef(10.0, 0.65, -17.2);
+			car.Car(text8.GLindex, text9.GLindex, rot6);
 		glPopMatrix();
 	glPopMatrix();
 
@@ -427,7 +608,7 @@ void animacion()
 			dwLastUpdateTime6 = dwCurrentTime;
 		}
 	}
-	
+	glutPostRedisplay();
 }
 
 void reshape(int width, int height)   // Creamos funcion Reshape
@@ -514,7 +695,7 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 			if (anim6 == 0)
 			{
 				anim6 = 1;
-			}
+			} 
 			else {
 				anim6 = 0;
 			}
