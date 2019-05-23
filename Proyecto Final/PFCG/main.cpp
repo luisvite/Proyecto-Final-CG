@@ -367,8 +367,8 @@ void animacion()
 		}
 		if (dwElapsedTime3_2 >= 50)
 		{
-			if (rot3_2 <= 355 && aux3_1 < 3) {
-				rot3_2 = (rot3_2 + 5) % 360;
+			if (rot3_2 <= 356 && aux3_1 < 3) {
+				rot3_2 = (rot3_2 + 4) % 360;
 				dwLastUpdateTime3_2 = dwCurrentTime;
 				if (rot3_2 == 0) {
 					aux3_1 = aux3_1 + 1;
