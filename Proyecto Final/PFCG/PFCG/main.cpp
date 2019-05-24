@@ -94,9 +94,11 @@ DWORD dwElapsedTime7 = 0;
 DWORD dwElapsedTime8 = 0;
 
 //Variables usadas para crear el movimiento
-int rot1_1 = 0, rot2 = 0, rot2_2 = 0, rot3 = 0, rot3_2 = 0, rot4 = 0, rot5 = 0, rot6 = 0;
-int aux1_1 = 0, aux2_1 = 0, aux3_1 = 0, aux4_1 = 0, aux5_1=0;
+int rot1_1 = 0, rot2 = 0, rot2_2 = 0, rot3 = 0, rot3_2 = 0, rot4 = 0, rot5 = 0, rot6 = 0, rot7 = 0, rot8 = 0;
+int aux1_1 = 0, aux2_1 = 0, aux3_1 = 0, aux4_1 = 0, aux5_1=0, aux7 = 0;
+float aux7_1 = 0, aux7_2 = 0;
 int anim1 = 0, anim2 = 0, anim3 = 0, anim4 = 0, anim5 = 0, anim6 = 0, anim7 = 0, anim8 = 0;
+float posx = 10.0, posy = 0.65, posz = -17.2;
 int t = 0;
 
 void InitGL(GLvoid) {
@@ -253,6 +255,9 @@ void InitGL(GLvoid) {
 void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
+
+	/*glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);
+	glEnable(GL_LIGHTING);*/
 
 	glPushMatrix();
 		glRotatef(g_lookupdown, 1.0f, 0, 0);
@@ -475,7 +480,10 @@ void display(void) {
 
 		//dibujando car de la montaña rusa
 		glPushMatrix();
-			glTranslatef(10.0, 0.65, -17.2);
+			//10.0, 0.65, -17.2
+			glTranslatef(posx, posy, posz);
+			glRotatef(rot7, 0, 1, 0);
+			glRotatef(rot8, 0, 0, 1);
 			car.Car(text8.GLindex, text9.GLindex, rot6);
 		glPopMatrix();
 	glPopMatrix();
@@ -494,6 +502,7 @@ void animacion()
 	dwElapsedTime4 = dwCurrentTime - dwLastUpdateTime4;
 	dwElapsedTime5 = dwCurrentTime - dwLastUpdateTime5;
 	dwElapsedTime6 = dwCurrentTime - dwLastUpdateTime6;
+	dwElapsedTime7 = dwCurrentTime - dwLastUpdateTime7;
 	
 	//animacion 1
 	if (anim1 == 1)
@@ -599,13 +608,379 @@ void animacion()
 		}
 	}
 	
-	//animacion 6
-	if (anim6 == 1)
+	//animacion 6 y animacion 7 (No terminada)
+	if (anim6 == 1 && anim7 == 1)
 	{
 		if (dwElapsedTime6 >= 10)
 		{
 			rot6 = (rot6 + 10) % 360;
 			dwLastUpdateTime6 = dwCurrentTime;
+		}
+		if (dwElapsedTime7 >= 20) {
+			switch (aux7) {
+				case 0:
+					if (posx < 46) {
+						posx = posx + 0.5;
+						dwLastUpdateTime7 = dwCurrentTime;
+						if (posx == 46) {
+							aux7 = 1;
+						}
+					}
+					break;
+				case 1:
+					if (rot7 == 0) {
+						posx = posx + 1.435;
+						posz = posz - 1.435;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 15) {
+						posx = posx + 1.435;
+						posz = posz - 1.435;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 30) {
+						posx = posx + 1.435;
+						posz = posz - 1.435;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 45) {
+						posx = posx + 1.435;
+						posz = posz - 1.435;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 60) {
+						posx = posx + 1.435;
+						posz = posz - 1.435;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 75) {
+						posx = posx + 1.435;
+						posz = posz - 1.435;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 90) {
+						posx = posx + 1.44;
+						posz = posz - 1.44;
+						aux7 = 2;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 2:
+					if (rot8 == 0) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 15) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 30) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 45) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 60) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 75) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 90) {
+						posy = posy + 1.44;
+						posz = posz - 1.44;
+						aux7 = 3;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 3:
+					if (rot8 == 90) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 75) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 60) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 45) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 30) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 15) {
+						posy = posy + 1.435;
+						posz = posz - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 0) {
+						posy = posy + 1.44;
+						posz = posz - 1.44;
+						aux7 = 4;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 4:
+					if (rot7 == 90) {
+						posx = posx - 2.15;
+						posz = posz - 2.15;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 105) {
+						posx = posx - 2.15;
+						posz = posz - 2.15;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 120) {
+						posx = posx - 2.15;
+						posz = posz - 2.15;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 135) {
+						posx = posx - 2.15;
+						posz = posz - 2.15;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 150) {
+						posx = posx - 2.15;
+						posz = posz - 2.15;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 165) {
+						posx = posx - 2.15;
+						posz = posz - 2.15;
+						rot7 = (rot7 + 15) % 360;
+					}
+					else if (rot7 == 180) {
+						posx = posx - 2.15;
+						posz = posz - 2.15;
+						aux7 = 5;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 5:
+					if (rot8 == 0) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -15) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -30) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -45) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -60) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -75) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -90) {
+						posx = posx - 1.44;
+						posy = posy - 1.44;
+						aux7 = 6;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 6:
+					if (rot8 == -90) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == -75) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == -60) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == -45) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == -30) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == -15) {
+						posx = posx - 1.435;
+						posy = posy - 1.435;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 0) {
+						posx = posx - 1.44;
+						posy = posy - 1.44;
+						aux7 = 7;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 7:
+					if (rot8 == 0) {
+						posx = posx - 0.72;
+						posy = posy + 0.72;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 15) {
+						posx = posx - 0.72;
+						posy = posy + 0.72;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 30) {
+						posx = posx - 0.72;
+						posy = posy + 0.72;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 45) {
+						posx = posx - 0.72;
+						posy = posy + 0.72;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 60) {
+						posx = posx - 0.72;
+						posy = posy + 0.72;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 75) {
+						posx = posx - 0.72;
+						posy = posy + 0.72;
+						rot8 = (rot8 + 15) % 360;
+					}
+					else if (rot8 == 90) {
+						posx = posx - 0.73;
+						posy = posy + 0.73;
+						aux7 = 8;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 8:
+					if (posy < 21.7) {
+						posy = posy + 0.5;
+						if (posy == 21.7) {
+							aux7 = 9;
+						}
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 9:
+					if (rot8 == 90) {
+						posy = posy + 1.435;
+						posx = posx - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 75) {
+						posy = posy + 1.435;
+						posx = posx - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 60) {
+						posy = posy + 1.435;
+						posx = posx - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 45) {
+						posy = posy + 1.435;
+						posx = posx - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 30) {
+						posy = posy + 1.435;
+						posx = posx - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 15) {
+						posy = posy + 1.435;
+						posx = posx - 1.435;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == 0) {
+						posy = posy + 1.44;
+						posx = posx - 1.44;
+						aux7 = 10;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				case 10:
+					if (rot8 == 0) {
+						posx = posx - 0.72;
+						posy = posy - 0.72;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -15) {
+						posx = posx - 0.72;
+						posy = posy - 0.72;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -30) {
+						posx = posx - 0.72;
+						posy = posy - 0.72;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -45) {
+						posx = posx - 0.72;
+						posy = posy - 0.72;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -60) {
+						posx = posx - 0.72;
+						posy = posy - 0.72;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -75) {
+						posx = posx - 0.72;
+						posy = posy - 0.72;
+						rot8 = (rot8 - 15) % 360;
+					}
+					else if (rot8 == -90) {
+						posx = posx - 0.73;
+						posy = posy - 0.73;
+						aux7 = 6;
+					}
+					dwLastUpdateTime7 = dwCurrentTime;
+					break;
+				default:        // Cualquier otra cosa
+					break;
+			}
 		}
 	}
 	glutPostRedisplay();
@@ -695,9 +1070,11 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 			if (anim6 == 0)
 			{
 				anim6 = 1;
+				anim7 = 1;
 			} 
 			else {
 				anim6 = 0;
+				anim7 = 0;
 			}
 			break;
 		case 27:        // Cuando Esc es presionado...
